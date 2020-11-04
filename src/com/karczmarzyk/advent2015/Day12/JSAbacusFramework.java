@@ -12,7 +12,7 @@ public class JSAbacusFramework {
     public static void main(String[] args) throws IOException {
 //        String tekst = new String(Files.readAllBytes(Path.of("src/com/karczmarzyk/advent2015/resources/day12.txt")));
 
-        //TODO - zaczytywaæ nawiasy klamrowe od "nasjstarszgo'!!!
+        //TODO - zaczytywaæ nawiasy klamrowe od "nasjstarszgo'!!!sdfsdfsd
         String tekst = "{\"d\":\"red\",\"e\":[1,2,3,4],\"f\":5}";
         String nowy = "";
         int start = 0;
