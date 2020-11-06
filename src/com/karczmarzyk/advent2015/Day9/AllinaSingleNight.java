@@ -3,10 +3,8 @@ package com.karczmarzyk.advent2015.Day9;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class AllinaSingleNight {
     public static final String [] tab = {"Tristram","AlphaCentauri","Snowdin","Tambi","Faerun","Norrath","Straylight","Arbre"};
@@ -43,7 +41,7 @@ public class AllinaSingleNight {
     public static void generateArrayPermutation(int k, String[] array)
     {
         if(k==1)
-            permutations.add(Arrays.stream(array).collect(Collectors.joining(",")));
+            permutations.add(String.join(",", array));
         else
         {
             generateArrayPermutation(k-1,array);
