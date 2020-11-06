@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DinnerTable {
-    public static final String [] GUESTS_NAMES = {"Alice","Bob","Carol","David","Eric","Frank","George","Mallory"};
+    public static final String [] GUESTS_NAMES = {"Alice","Bob","Carol","David","Eric","Frank","George","Mallory","Tomek"};
     public static ArrayList<List<String>> PERMUTATIONS = new ArrayList<>();
     public static ArrayList<Guest> GUESTS = new ArrayList<>();
 
