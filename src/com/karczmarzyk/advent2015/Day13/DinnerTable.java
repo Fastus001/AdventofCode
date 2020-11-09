@@ -26,17 +26,17 @@ public class DinnerTable {
     private static int getHappinessNumber(List<String> list)
     {
         int sum = 0;
-        String name = "";
-        String friend = "";
+        String name;
+        String friend;
         for (int i = 0; i < list.size(); i++) {
             name = list.get(i);
-            if(i==0)
+            if(i == 0)
             {
                 friend = list.get(list.size()-1);
                 sum = getSum(sum, name, friend);
                 friend = list.get(i+1);
                 sum = getSum(sum, name, friend);
-            }else if(i== list.size()-1)
+            }else if(i == list.size()-1)
             {
                 friend = list.get(i-1);
                 sum = getSum(sum, name, friend);
@@ -66,7 +66,7 @@ public class DinnerTable {
             while(in.hasNext())
             {
                 String[] tab = in.nextLine().split("\\s");
-                int number = 0;
+                int number;
                 if(tab[2].equals("lose"))
                     number = Integer.parseInt("-"+tab[3]);
                 else
