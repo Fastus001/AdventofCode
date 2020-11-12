@@ -4,9 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class AuntSue {
+    public static final Pattern CATS = Pattern.compile("(cats:) (\\d+)");
+    public static final Pattern TREES = Pattern.compile("(trees:) (\\d+)");
+    public static final Pattern POMS = Pattern.compile("(pomeranians:) (\\d+)");
+    public static final Pattern GOLD = Pattern.compile("(goldfish:) (\\d+)");
+
 
     public static boolean isChildrenOtherThanThree(String pattern)
     {
@@ -25,7 +32,12 @@ public class AuntSue {
         String fullPat = "cats: 7";
         if(pattern.contains(pat))
         {
-            return pattern.contains(fullPat);
+            String s = CATS.matcher(pattern)
+                    .results().map(matchResult -> matchResult
+                            .group(2)).findFirst()
+                    .orElse("-1");
+            int number = Integer.parseInt(s);
+            return number>7;
         }
         return true;
     }
@@ -45,7 +57,12 @@ public class AuntSue {
         String fullPat = "pomeranians: 3";
         if(pattern.contains(pat))
         {
-            return pattern.contains(fullPat);
+            String s = POMS.matcher(pattern)
+                    .results().map(matchResult -> matchResult
+                            .group(2)).findFirst()
+                    .orElse("-1");
+            int number = Integer.parseInt(s);
+            return number<3;
         }
         return true;
     }
@@ -75,7 +92,14 @@ public class AuntSue {
         String pat = "goldfish";
         String fullPat = "goldfish: 5";
         if(pattern.contains(pat))
-            return pattern.contains(fullPat);
+        {
+            String s = GOLD.matcher(pattern)
+                    .results().map(matchResult -> matchResult
+                            .group(2)).findFirst()
+                    .orElse("-1");
+            int number = Integer.parseInt(s);
+            return number<5;
+        }
         return true;
     }
     public static boolean isTreesOtherThanThree(String pattern)
@@ -83,7 +107,14 @@ public class AuntSue {
         String pat = "trees";
         String fullPat = "trees: 3";
         if(pattern.contains(pat))
-            return pattern.contains(fullPat);
+        {
+            String s = TREES.matcher(pattern)
+                    .results().map(matchResult -> matchResult
+                            .group(2)).findFirst()
+                    .orElse("-1");
+            int number = Integer.parseInt(s);
+            return number>3;
+        }
         return true;
     }
     public static boolean isCarsOtherThanTwo(String pattern)
@@ -104,13 +135,13 @@ public class AuntSue {
         return true;
     }
 
-
+    //Part two -
     public static void main(String[] args) throws IOException {
         final List<String> inList = Files.readAllLines(Path.of("src/com/karczmarzyk/advent2015/resources/day16.txt"));
         List<String> result = inList.stream()
-                .filter(s -> s.contains("children: 3") || s.contains("cats: 7") || s.contains("samoyeds: 2")
-                || s.contains("pomeranians: 3") || s.contains("akitas: 0") || s.contains("vizslas: 0")
-                || s.contains("goldfish: 5") || s.contains("trees: 3") || s.contains("cars: 2") || s.contains("perfumes: 1"))
+                .filter(s -> s.contains("children: 3") || s.contains("cats:") || s.contains("samoyeds: 2")
+                || s.contains("pomeranians:") || s.contains("akitas: 0") || s.contains("vizslas: 0")
+                || s.contains("goldfish") || s.contains("trees:") || s.contains("cars: 2") || s.contains("perfumes: 1"))
                 .collect(Collectors.toList());
 
         System.out.println("result = " + result);
