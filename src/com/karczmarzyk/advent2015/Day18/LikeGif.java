@@ -13,9 +13,9 @@ public class LikeGif {
         LikeGif likeGif = new LikeGif();
         for (int i = 0; i < 100; i++) {
             likeGif.updateLights();
+//            likeGif.showList();
         }
         System.out.println("likeGif.numbersOfLights() = " + likeGif.numbersOfLights());
-        likeGif.showList();
     }
 
     public LikeGif()
@@ -112,6 +112,11 @@ public class LikeGif {
                     temp[i][k] = true;
             }
         }
+        //Part 2
+        temp[0][0] = true;
+        temp[0][temp.length-1]  = true;
+        temp[temp.length-1][0] = true;
+        temp[temp.length-1][temp.length-1]  = true;
         tab = temp;
     }
 }
