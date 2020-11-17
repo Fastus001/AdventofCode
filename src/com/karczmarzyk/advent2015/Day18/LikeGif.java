@@ -13,7 +13,6 @@ public class LikeGif {
         LikeGif likeGif = new LikeGif();
         for (int i = 0; i < 100; i++) {
             likeGif.updateLights();
-//            likeGif.showList();
         }
         System.out.println("likeGif.numbersOfLights() = " + likeGif.numbersOfLights());
     }
@@ -60,7 +59,6 @@ public class LikeGif {
                     System.out.print("#");
                 else
                     System.out.print(".");
-
             }
             System.out.println();
         }
@@ -112,7 +110,7 @@ public class LikeGif {
                     temp[i][k] = true;
             }
         }
-        //Part 2
+        //Part 2 - all corners are alway "on"
         temp[0][0] = true;
         temp[0][temp.length-1]  = true;
         temp[temp.length-1][0] = true;
