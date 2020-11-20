@@ -10,12 +10,11 @@ public class InfiniteElves {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executor = Executors.newCachedThreadPool();
         List<Callable<Integer>> lista = new ArrayList<>();
-        for (int i = 800000; i > 700000; i-=1000) {
+        for (int i = 12; i < 20; i+=10) {
             lista.add( new InfiniteHouses( i ) );
         }
         executor.invokeAll( lista );
         executor.shutdown();
         System.out.println("tutaj");
     }
-
 }

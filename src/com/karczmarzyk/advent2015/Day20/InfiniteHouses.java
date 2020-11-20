@@ -3,27 +3,29 @@ package com.karczmarzyk.advent2015.Day20;
 import java.util.concurrent.Callable;
 
 public class InfiniteHouses implements Callable<Integer> {
-    private int number;
+    private final int number;
 
     public InfiniteHouses(int number) {
         this.number = number;
     }
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
         int sum = 0;
-        for (int i = 0; i < 1000; i++) {
-            sum = 0;
-            for (int j = 1; j <=number+i ; j++) {
-                if((number+i)%j==0)
-                    sum += j;
-            }
-            if(sum>3400000)
-            {
-                System.out.println( "number = " + (number+i) + " suma = " +(sum*10));
-                break;
-            }
+        if(number<51)
+        {
+            for (int i = 1; i <= number; i++) {
+                if(number % i == 0)
+                    sum+=i;
+             }
         }
-        return sum*10;
+        else{
+                for (int i = number-49; i <= number; i++) {
+                    System.out.println(i);
+                    if(number % i == 0)
+                      sum+=i;
+                }
+            }
+        return sum*11;
     }
 }
