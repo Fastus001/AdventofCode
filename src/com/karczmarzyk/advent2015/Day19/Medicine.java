@@ -7,30 +7,33 @@ import java.util.Scanner;
 
 public class Medicine {
     private final ArrayList<String> inputList = new ArrayList<>();
-    private Replacement replacement = new Replacement( "CRnSiRnCaPTiMgYCaPTiRnFArSiThFArCaSiThSiThPBCaCaSiRnSiRnTiTiMgArPBCaPMgYPTiRnFArFArCaSiRnBPMgArPRnCaPTiRnFArCaSiThCaCaFArPBCaCaPTiTiRnFArCaSiRnSiAlYSiThRnFArArCaSiRnBFArCaCaSiRnSiThCaCaCaFYCaPTiBCaSiThCaSiThPMgArSiRnCaPBFYCaCaFArCaCaCaCaSiThCaSiRnPRnFArPBSiThPRnFArSiRnMgArCaFYFArCaSiRnSiAlArTiTiTiTiTiTiTiRnPMgArPTiTiTiBSiRnSiAlArTiTiRnPMgArCaFYBPBPTiRnSiRnMgArSiThCaFArCaSiThFArPRnFArCaSiRnTiBSiThSiRnSiAlYCaFArPRnFArSiThCaFArCaCaSiThCaCaCaSiRnPRnCaFArFYPMgArCaPBCaPBSiRnFYPBCaFArCaSiAl" );;
+    private final Replacement replacement = new Replacement( "CRnSiRnCaPTiMgYCaPTiRnFArSiThFArCaSiThSiThPBCaCaSiRnSiRnTiTiMgArPBCaPMgYPTiRnFArFArCaSiRnBPMgArPRnCaPTiRnFArCaSiThCaCaFArPBCaCaPTiTiRnFArCaSiRnSiAlYSiThRnFArArCaSiRnBFArCaCaSiRnSiThCaCaCaFYCaPTiBCaSiThCaSiThPMgArSiRnCaPBFYCaCaFArCaCaCaCaSiThCaSiRnPRnFArPBSiThPRnFArSiRnMgArCaFYFArCaSiRnSiAlArTiTiTiTiTiTiTiRnPMgArPTiTiTiBSiRnSiAlArTiTiRnPMgArCaFYBPBPTiRnSiRnMgArSiThCaFArCaSiThFArPRnFArCaSiRnTiBSiThSiRnSiAlYCaFArPRnFArSiThCaFArCaCaSiThCaCaCaSiRnPRnCaFArFYPMgArCaPBCaPBSiRnFYPBCaFArCaSiAl" );
 
-
+/*
+Note: no need to add last three input lines, as this could obscure the results.
+ */
     public static void main(String[] args) {
         Medicine medicine = new Medicine();
         medicine.getInput();
-
-        System.out.println( "medicine = " + medicine.getResult() );
-
+        while(medicine.replacement.textSize()>2)
+        {
+            medicine.getResult();
+        }
+        System.out.println("Number of steps needed to make medicine is " + (medicine.replacement.numberOfOccurrences+1));
     }
 
-    private long getResult()
+
+    private void getResult()
     {
-        ArrayList<String> resultList = new ArrayList<>();
         for(String s: inputList)
         {
             String [] split = s.split( " => " );
-            resultList.addAll( replacement.loadReplacements( split[0],split[1] ) );
+            replacement.loadReplacements( split[1],split[0] );
         }
-        return resultList.stream().distinct().count();
     }
 
     public void getInput() {
-        try(Scanner in = new Scanner( new File( "src/com/karczmarzyk/advent2015/resources/day19.txt") ))
+        try(Scanner in = new Scanner( new File( "src/com/karczmarzyk/advent2015/resources/day19part2.txt") ))
         {
            while(in.hasNext())
            {
@@ -41,11 +44,4 @@ public class Medicine {
         }
     }
 
-    public int getInputListSize() {
-        return inputList.size();
-    }
-
-    public String getListItem(int i) {
-        return inputList.get( i );
-    }
 }
