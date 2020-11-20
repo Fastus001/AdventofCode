@@ -41,12 +41,6 @@ public class Replacement {
         return count > 1;
     }
 
-    public void showText()
-    {
-        System.out.println( "text = " + text + "\nnumber of steps = " + numberOfOccurrences
-        + "\n length = " + textSize());
-    }
-
     public int textSize()
     {
         return text.length();
