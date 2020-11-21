@@ -26,9 +26,7 @@ public class InfiniteElves {
         Integer result = 0;
         try {
             result = futures.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return result;
