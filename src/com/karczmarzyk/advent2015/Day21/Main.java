@@ -17,6 +17,12 @@ public class Main {
                 .mapToInt(Hero::getCost)
                 .min()
                 .orElse(-1);
+        int maxCost = listOfHeroes.stream()
+                .filter(hero -> !hero.fightWithBoss())
+                .mapToInt(Hero::getCost)
+                .max()
+                .orElse(-1);
         System.out.println("minimumCostOfEq = " + minimumCostOfEq);
+        System.out.println("maxCost = " + maxCost);
     }
 }
