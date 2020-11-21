@@ -48,12 +48,12 @@ public class EquipmentPermutations {
         for (int i = 10; i < listOfItems.size(); i++) {
             permutationsOfRings.add(List.of(listOfItems.get(i)));
         }
-        List<int[]> combinations = this.generate(6, 2);
+        List<int[]> combinations = this.generate(6);
         for(int[] t:combinations)
         {
             List<Item> list = new ArrayList<>();
-            for (int i = 0; i < t.length; i++) {
-                list.add(listOfItems.get(t[i]));
+            for (int j : t) {
+                list.add(listOfItems.get(j));
             }
             permutationsOfRings.add(list);
         }
@@ -73,14 +73,14 @@ public class EquipmentPermutations {
         }
     }
 
-    private List<int[]> generate(int n, int k)
+    private List<int[]> generate(int n)
     {
         List<int[]> combinations = new ArrayList<>();
-        helper(combinations, new int[k], 0, n-1,0);
+        helper(combinations, new int[2], 0, n-1,0);
         return combinations;
     }
 
-    private int getAllPermutations() {
+    private void getAllPermutations() {
 
         allPermutations.addAll(permutationsWeaponAndArmour);
         for(List<Item> weap:permutationsWeaponAndArmour)
@@ -93,7 +93,6 @@ public class EquipmentPermutations {
                 allPermutations.add(nowy);
             }
         }
-        return allPermutations.size();
     }
 
     public int getPermutationsOfWeaponSize() {
