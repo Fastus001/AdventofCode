@@ -3,6 +3,8 @@ package com.karczmarzyk.advent2015.Day22;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FightTest {
@@ -81,7 +83,7 @@ class FightTest {
     @Test
     void testAddSpellList()
     {
-        fight.addSpellList( "Magic Missile,Magic Missile" );
+        fight.addSpellList(Arrays.asList( "Magic Missile","Magic Missile" ));
         assertEquals( "Magic Missile",fight.getSpell(0) );
         assertEquals( "Magic Missile",fight.getSpell(1) );
     }
@@ -89,7 +91,7 @@ class FightTest {
     @Test
     void testOnePlayerRound()
     {
-        fight.addSpellList( "Magic Missile,Magic Missile" );
+        fight.addSpellList( Arrays.asList("Magic Missile","Magic Missile" ));
         fight.playerRound();
         assertEquals( 9,fight.getBossHP() );
         fight.playerRound();
@@ -112,7 +114,7 @@ class FightTest {
     {
         Wizard wizard2 = new Wizard( 10,250 );
         Fight fight2 = new Fight( wizard2 );
-        fight2.addSpellList( "Poison,Magic Missile," );
+        fight2.addSpellList( Arrays.asList("Poison","Magic Missile" ));
         assertEquals( 226,fight2.fightResult());
         assertEquals( 0,fight2.getBossHP() );
         assertEquals( 2,fight2.getWizardHp() );
@@ -124,7 +126,7 @@ class FightTest {
         Wizard wizard2 = new Wizard( 10,250 );
         Fight fight2 = new Fight( wizard2 );
         fight2.setBossHP( 14 );
-        fight2.addSpellList( "Recharge,Shield,Drain,Poison,Magic Missile" );
+        fight2.addSpellList( Arrays.asList( "Recharge","Shield","Drain","Poison","Magic Missile" ) );
         assertEquals( 641,fight2.fightResult());
         assertEquals( -1,fight2.getBossHP() );
         assertEquals( 1,fight2.getWizardHp() );

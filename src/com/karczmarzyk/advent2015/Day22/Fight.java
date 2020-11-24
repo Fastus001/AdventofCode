@@ -51,10 +51,12 @@ public class Fight {
         boolean test = true;
         while(test)
         {
-            if(test)
-                test = playerRound();
-            if ( test )
-                test = bossRound();
+            test = playerRound();
+            if(!test)
+                break;
+            test = bossRound();
+            if(!test)
+                break;
         }
 
         if(bossHP < 1)
@@ -63,14 +65,15 @@ public class Fight {
         }else if(wizard.getHP() <1)
         {
             return -1;
-        }else{
+        }
+        else{
             return -1;
         }
     }
 
-    public void addSpellList(String spells)
+    public void addSpellList(List<String> spells)
     {
-        spellBook.addAll( Arrays.asList( spells.split( "," ) ));
+        spellBook = spells;
     }
     //true - fight goes on, false - boss or player lose
     public boolean bossRound()

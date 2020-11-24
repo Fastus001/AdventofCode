@@ -5,35 +5,27 @@ import java.util.stream.Collectors;
 
 public class WizardSimulator {
 
-    private static List<String> getCombinationsOfSpells()
+    private static List<List<String>> getCombinationsOfSpells()
     {
         SpellCombinations spellCombinations = new SpellCombinations();
         spellCombinations.addFirstFive();
-        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),8 );
+        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),9 );
         return spellCombinations.getFullList();
     }
 
     public static void main(String[] args) {
 
-        List<String> combinations = WizardSimulator.getCombinationsOfSpells();
-//        int minimum = combinations.stream()
-//                .mapToInt( WizardSimulator::fightResult )
-//                .filter( s -> s > 0 )
-//                .min()
-//                .orElse( -20 );
-
-        List<String> collect = combinations.stream().map( WizardSimulator::fightResultString )
-                .filter( s -> s.length()>1 )
-                .collect( Collectors.toList() );
-        for (int i = 0; i < 100; i++) {
-            System.out.println( "collect = " + collect.get( i ) );
-        }
-
-
+        List<List<String>> combinations = WizardSimulator.getCombinationsOfSpells();
+        int minimum = combinations.stream()
+                .mapToInt( WizardSimulator::fightResult )
+                .filter( s -> s > 0 )
+                .min()
+                .orElse( -20 );
+        System.out.println( "minimum = " + minimum );
         System.out.println( "combinations.size() = " + combinations.size() );
     }
 
-    public static int fightResult(String spells)
+    public static int fightResult(List<String> spells)
     {
         Wizard wizard = new Wizard( 50,500 );
         Fight fight = new Fight( wizard );
@@ -42,15 +34,18 @@ public class WizardSimulator {
         return fight.fightResult();
     }
 
-    public static String fightResultString(String spells)
+    public static String fightResultString(List<String> spells)
     {
         Wizard wizard = new Wizard( 50,500 );
         Fight fight = new Fight( wizard );
         fight.setBossHP( 55 );
         fight.addSpellList( spells );
-        if(fight.fightResult() > 0)
-            return spells;
-        else
+        int result = fight.fightResult();
+        if(result > 0)
+        {
+//            System.out.println( "result+ spells = " + result +" "+ spells );
+            return result+ " " + spells;
+        }else
             return "";
     }
 }

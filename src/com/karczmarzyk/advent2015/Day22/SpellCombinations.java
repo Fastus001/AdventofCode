@@ -2,7 +2,6 @@ package com.karczmarzyk.advent2015.Day22;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpellCombinations {
     private static final String MM = "Magic Missile";
@@ -10,9 +9,9 @@ public class SpellCombinations {
     private static final String SH = "Shield";
     private static final String PS = "Poison";
     private static final String RCHRG = "Recharge";
-    private final List<StringBuilder> fullList = new ArrayList<>();
+    private final List<List<String>> fullList = new ArrayList<>();
 
-    public StringBuilder getFullListIndex(int index) {
+    public List<String> getFullListIndex(int index) {
         return fullList.get( index );
     }
 
@@ -21,40 +20,71 @@ public class SpellCombinations {
         return fullList.size();
     }
 
-    public void addNewSpells(List<StringBuilder> list, int counter)
+    public void addNewSpells(List<List<String>> list, int counter)
     {
         if(counter == 0)
             return;
         else
         {
-            List<StringBuilder> newList = new ArrayList<>();
-            for(StringBuilder sb:list)
+            List<List<String>> newList = new ArrayList<>();
+            for(List<String> sb:list)
             {
-                newList.add( new StringBuilder(sb + ","+MM ));
-                newList.add( new StringBuilder(sb + ","+DR ));
-                newList.add( new StringBuilder(sb + ","+SH ));
-                newList.add( new StringBuilder(sb + ","+PS ));
-                newList.add( new StringBuilder(sb + "," + RCHRG ));
+                newList.add( getNewListWithNewString(sb,MM));
+                newList.add( getNewListWithNewString(sb,DR));
+                if(checkForEarlierPresence(sb,SH))
+                    newList.add( getNewListWithNewString(sb,SH));
+
+                if(checkForEarlierPresence(sb,PS))
+                    newList.add( getNewListWithNewString(sb,PS));
+
+                if(checkForEarlierPresence( sb,RCHRG ))
+                newList.add( getNewListWithNewString(sb,RCHRG));
             }
             fullList.addAll( newList );
             addNewSpells( newList,--counter );
         }
     }
 
-    public List<StringBuilder> addFirstFive()
+    private boolean checkForEarlierPresence(List<String> sb, String spell) {
+        if(sb.get( sb.size()-1 ).equals( spell ))
+        {
+            return false;
+        }
+        return sb.size() <= 1 || !sb.get( sb.size() - 2 ).equals( spell );
+    }
+
+    private List<String> getNewListWithNewString(List<String> in,String mm) {
+        List<String> temp = new ArrayList<>(in);
+        temp.add( mm );
+        return temp;
+    }
+
+    public List<List<String>> addFirstFive()
     {
-        List<StringBuilder> list = new ArrayList<>();
-        list.add( new StringBuilder("Magic Missile") );
-        list.add( new StringBuilder("Drain") );
-        list.add( new StringBuilder("Shield") );
-        list.add( new StringBuilder("Poison") );
-        list.add( new StringBuilder("Recharge") );
+        List<List<String>> list = new ArrayList<>();
+        list.add( getNewListWithNewString(MM));
+        list.add( getNewListWithNewString(DR));
+        list.add( getNewListWithNewString(SH));
+        list.add( getNewListWithNewString(PS));
+        list.add( getNewListWithNewString(RCHRG));
+        fullList.addAll( list );
         return list;
     }
 
-    public List<String> getFullList() {
-        return fullList.stream()
-                .map( StringBuilder::toString )
-                .collect( Collectors.toList() );
+    private List<String> getNewListWithNewString(String mm) {
+        List<String> temp = new ArrayList<>();
+        temp.add( mm );
+        return temp;
+    }
+
+    public void show() {
+        for(List<String> lst:fullList)
+        {
+            System.out.println( "lst = " + lst );
+        }
+    }
+
+    public List<List<String>> getFullList() {
+        return fullList;
     }
 }
