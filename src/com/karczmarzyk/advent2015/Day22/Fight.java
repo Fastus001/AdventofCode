@@ -56,11 +56,16 @@ public class Fight {
             if ( test )
                 test = bossRound();
         }
-        if(bossHP<1)
+
+        if(bossHP < 1)
         {
             return wizard.getSpentMana();
-        }else
+        }else if(wizard.getHP() <1)
+        {
             return -1;
+        }else{
+            return -1;
+        }
     }
 
     public void addSpellList(String spells)

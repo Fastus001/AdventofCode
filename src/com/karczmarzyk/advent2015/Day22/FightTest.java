@@ -130,6 +130,9 @@ class FightTest {
         assertEquals( 1,fight2.getWizardHp() );
     }
 
+
+
+
 }
 
 
