@@ -2,6 +2,7 @@ package com.karczmarzyk.advent2015.Day22;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpellCombinations {
     private static final String MM = "Magic Missile";
@@ -49,5 +50,11 @@ public class SpellCombinations {
         list.add( new StringBuilder("Poison") );
         list.add( new StringBuilder("Recharge") );
         return list;
+    }
+
+    public List<String> getFullList() {
+        return fullList.stream()
+                .map( StringBuilder::toString )
+                .collect( Collectors.toList() );
     }
 }
