@@ -140,10 +140,10 @@ class FightTest {
         Wizard wizard2 = new Wizard( 50,500 );
         Fight fight2 = new Fight( wizard2 );
         fight2.setBossHP( 55 );
-        fight2.addSpellList( Arrays.asList( "Poison"," Drain"," Recharge"," Poison"," Shield"," Recharge"," Poison"," Drain" ) );
-        assertEquals( 641,fight2.fightResult());
-        assertEquals( -1,fight2.getBossHP() );
-        assertEquals( 1,fight2.getWizardHp() );
+        fight2.addSpellList( Arrays.asList( "Poison","Drain","Recharge","Poison","Shield","Recharge","Poison","Drain" ) );
+        assertEquals( -1,fight2.fightResult());
+        assertEquals( 17,fight2.getBossHP() );
+        assertEquals( 11,fight2.getWizardHp() );
     }
 
 

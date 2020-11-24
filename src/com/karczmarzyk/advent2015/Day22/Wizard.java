@@ -15,7 +15,7 @@ public class Wizard {
     {
         manaSpent +=53;
         mana -=53;
-//        System.out.println("Player casts Magic Missile, dealing 4 damage.");
+        System.out.println("Player casts Magic Missile, dealing 4 damage.");
         return 4;
     }
 
@@ -24,7 +24,7 @@ public class Wizard {
         manaSpent +=73;
         mana -=73;
         health +=2;
-//        System.out.println("Player casts Drain, dealing 2 damage, and healing 2 hit points.");
+        System.out.println("Player casts Drain, dealing 2 damage, and healing 2 hit points.");
         return 2;
     }
 
@@ -33,7 +33,7 @@ public class Wizard {
         manaSpent +=113;
         mana -=113;
         armour = 7;
-//        System.out.println("Player casts Shield, increasing armor by 7.");
+        System.out.println("Player casts Shield, increasing armor by 7.");
         return 6;
     }
 
@@ -41,7 +41,7 @@ public class Wizard {
     {
         manaSpent +=173;
         mana -=173;
-//        System.out.println("Player casts Poison.");
+        System.out.println("Player casts Poison.");
         return 6;
     }
 
@@ -49,7 +49,7 @@ public class Wizard {
     {
         manaSpent +=229;
         mana -=229;
-//        System.out.println("Player casts Recharge.");
+        System.out.println("Player casts Recharge.");
         return 5;
     }
 
@@ -70,15 +70,15 @@ public class Wizard {
     }
 
     public void show() {
-//        System.out.printf("- Player has %d hit points, %d armor, %d mana",health,armour,mana);
+        System.out.printf("- Player has %d hit points, %d armor, %d mana",health,armour,mana);
     }
 
     public boolean receiveDamage(int bossDMG) {
         int dmg = bossDMG-armour;
-//        if(armour==0)
-//            System.out.println("Boss attacks for 8 damage!");
-//        else
-//            System.out.printf("Boss attacks for 8-%d=%s damage!\n",armour,dmg);
+        if(armour==0)
+            System.out.println("Boss attacks for 8 damage!");
+        else
+            System.out.printf("Boss attacks for 8-%d=%s damage!\n",armour,dmg);
         health -= dmg;
         return health > 0;
     }
