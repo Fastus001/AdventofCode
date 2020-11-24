@@ -86,4 +86,8 @@ public class Wizard {
     public int getSpentMana() {
         return manaSpent;
     }
+
+    public void takeOneDamage() {
+        health -=1;
+    }
 }

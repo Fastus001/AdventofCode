@@ -1,6 +1,7 @@
 package com.karczmarzyk.advent2015.Day22;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -127,6 +128,19 @@ class FightTest {
         Fight fight2 = new Fight( wizard2 );
         fight2.setBossHP( 14 );
         fight2.addSpellList( Arrays.asList( "Recharge","Shield","Drain","Poison","Magic Missile" ) );
+        assertEquals( 641,fight2.fightResult());
+        assertEquals( -1,fight2.getBossHP() );
+        assertEquals( 1,fight2.getWizardHp() );
+    }
+
+    @Test
+    @DisplayName( "Test konkretnego przypadku" )
+    void testFight3()
+    {
+        Wizard wizard2 = new Wizard( 50,500 );
+        Fight fight2 = new Fight( wizard2 );
+        fight2.setBossHP( 55 );
+        fight2.addSpellList( Arrays.asList( "Poison"," Drain"," Recharge"," Poison"," Shield"," Recharge"," Poison"," Drain" ) );
         assertEquals( 641,fight2.fightResult());
         assertEquals( -1,fight2.getBossHP() );
         assertEquals( 1,fight2.getWizardHp() );

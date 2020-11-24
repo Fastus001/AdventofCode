@@ -89,10 +89,14 @@ public class Fight {
     public boolean playerRound()
     {
 //        System.out.println("\n-- Player turn --");
+        wizard.takeOneDamage();
+        if(wizard.getHP()<1)
+            return false;
         showContenders();
         checkEffects();
         if(bossHP < 1)
             return false;
+
         castSpell( spellBook.get( spellCounter++ ));
         if(spellCounter == spellBook.size())
             spellCounter=0;

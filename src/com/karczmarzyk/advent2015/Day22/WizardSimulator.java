@@ -9,7 +9,7 @@ public class WizardSimulator {
     {
         SpellCombinations spellCombinations = new SpellCombinations();
         spellCombinations.addFirstFive();
-        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),9 );
+        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),8 );
         return spellCombinations.getFullList();
     }
 
@@ -23,11 +23,17 @@ public class WizardSimulator {
                 .orElse( -20 );
         System.out.println( "minimum = " + minimum );
         System.out.println( "combinations.size() = " + combinations.size() );
+
+        List<String> results = combinations.stream().map( WizardSimulator::fightResultString )
+                .filter( s -> s.length() > 0 )
+                .collect( Collectors.toList() );
+        System.out.println( "results.size() = " + results.size() );
+        results.forEach( System.out::println );
     }
 
     public static int fightResult(List<String> spells)
     {
-        Wizard wizard = new Wizard( 50,500 );
+        Wizard wizard = new Wizard( 51,500 );
         Fight fight = new Fight( wizard );
         fight.setBossHP( 55 );
         fight.addSpellList( spells );
