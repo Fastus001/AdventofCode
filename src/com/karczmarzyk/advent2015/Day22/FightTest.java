@@ -142,8 +142,7 @@ class FightTest {
         fight2.setBossHP( 55 );
         fight2.addSpellList( Arrays.asList( "Poison","Drain","Recharge","Poison","Shield","Recharge","Poison","Drain" ) );
         assertEquals( -1,fight2.fightResult());
-        assertEquals( 17,fight2.getBossHP() );
-        assertEquals( 11,fight2.getWizardHp() );
+        assertEquals( 3,fight2.getBossHP() );
     }
 
 

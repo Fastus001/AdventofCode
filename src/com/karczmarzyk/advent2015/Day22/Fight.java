@@ -62,14 +62,14 @@ public class Fight {
 
         if(bossHP < 1) {
             return wizard.getSpentMana();
+        }else{
+            return -1;
         }
 //        }else if(wizard.getHP() <1)
 //        {
 //            return -1;
 //        }
-        else{
-            return -1;
-        }
+
     }
 
     public void addSpellList(List<String> spells)
@@ -97,10 +97,17 @@ public class Fight {
         checkEffects();
         if(bossHP < 1)
             return false;
+        if(spellCounter == spellBook.size()){
+            wizard.setHpOnMinus();
+            return false;
+        }
+        String spell = spellBook.get( spellCounter++ );
+        if(wizard.isAbleToCastSpell(spell))
+        {
+            castSpell( spell);
 
-        castSpell( spellBook.get( spellCounter++ ));
-        if(spellCounter == spellBook.size())
-            spellCounter=0;
+        }else
+            return false;
         return wizard.getManaPool() >= 0;
     }
 
@@ -120,7 +127,7 @@ public class Fight {
     private void checkRechargeEffect() {
         if(rechargeEffect > 0)
         {
-            --rechargeEffect;
+//            --rechargeEffect;
             System.out.println("Recharge provides 101 mana; its timer is now " + --rechargeEffect);
             wizard.addMana();
             if(rechargeEffect == 0)

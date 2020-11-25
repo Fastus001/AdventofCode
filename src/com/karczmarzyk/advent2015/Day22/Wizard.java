@@ -90,4 +90,21 @@ public class Wizard {
     public void takeOneDamage() {
         health -=1;
     }
+
+    public boolean isAbleToCastSpell(String spell) {
+        switch (spell)
+        {
+            case "Magic Missile": return mana>=53 ;
+            case "Drain":return mana >=73;
+            case "Shield":return mana>= 113;
+            case "Poison": return mana >=173;
+            case "Recharge": return mana >= 229;
+            default:
+                return false;
+        }
+    }
+
+    public void setHpOnMinus() {
+        health = -1;
+    }
 }
