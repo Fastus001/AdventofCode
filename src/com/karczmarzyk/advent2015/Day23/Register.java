@@ -2,52 +2,49 @@ package com.karczmarzyk.advent2015.Day23;
 
 public class Register {
     private int a = 0;
-    private int b = 0;
 
     public int executeInstruction(String inst, int index)
     {
-        if( inst.contains( "hlf" ))
-            return hlfInstruction( inst, index );
-        if ( inst.contains( "inc" ) )
-            return incInstruction(inst,index);
-        if ( inst.contains( "tpl" ) )
-            return tpl(inst,index);
-
-
-        return index;
+        if( !inst.contains( "j" ))
+            return firstThreeInstructions( inst, index );
+        else{
+            return jumpInstructions( inst, index);
+        }
     }
 
-    private int tpl(String inst, int index) {
+    private int jumpInstructions(String inst, int index) {
         String [] tab = inst.split( " " );
-        if ( tab[1].equals( "a" ) ) {
-            a*=3;
+        switch (tab[0])
+        {
+            case "jmp": return index+Integer.parseInt( tab[1] );
+            case "jio":
+                if(a == 1)
+                    return index+Integer.parseInt( tab[2] );
+                else
+                    return index+1;
+            case "jie":
+                if(a % 2 == 0)
+                    return index+Integer.parseInt( tab[2] );
+                else
+                    return index+1;
         }
-        else {
-            b*=3;
-        }
-        return index;
+        return 0;
     }
 
-
-    private int incInstruction(String inst, int index) {
+    private int firstThreeInstructions(String inst, int index) {
         String [] tab = inst.split( " " );
-        if ( tab[1].equals( "a" ) ) {
-            a++;
-        }
-        else {
-            b++;
-        }
-        return index;
+        changeA( tab[0]);
+        return index+1;
     }
 
-
-    private int hlfInstruction(String inst, int index) {
-        String [] tab = inst.split( " " );
-            if(tab[1].equals( "a" ))
-                a = a/2;
-            if(tab[1].equals( "b" ))
-                b = b/2;
-            return index;
+    private void changeA(String s) {
+        switch (s)
+        {
+            case "inc": a++;break;
+            case "hlf": a/=2;break;
+            case "tpl": a*=3;break;
+            default:break;
+        }
     }
 
     public int getA() {
