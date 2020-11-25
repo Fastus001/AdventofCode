@@ -9,7 +9,7 @@ public class WizardSimulator {
     {
         SpellCombinations spellCombinations = new SpellCombinations();
         spellCombinations.addFirstFive();
-        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),8 );
+        spellCombinations.addNewSpells(  spellCombinations.addFirstFive(),10 );
         return spellCombinations.getFullList();
     }
 
@@ -33,7 +33,7 @@ public class WizardSimulator {
 
     public static int fightResult(List<String> spells)
     {
-        Wizard wizard = new Wizard( 51,500 );
+        Wizard wizard = new Wizard( 50,500 );
         Fight fight = new Fight( wizard );
         fight.setBossHP( 55 );
         fight.addSpellList( spells );

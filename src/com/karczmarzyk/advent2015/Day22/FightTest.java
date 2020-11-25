@@ -145,6 +145,19 @@ class FightTest {
         assertEquals( 3,fight2.getBossHP() );
     }
 
+    @Test
+    @DisplayName( "Test konkretnego przypadku" )
+    void testFight4()
+    {
+        Wizard wizard2 = new Wizard( 50,500 );
+        Fight fight2 = new Fight( wizard2 );
+        fight2.setBossHP( 55 );
+        fight2.addSpellList( Arrays.asList( "Poison","Drain","Recharge","Poison","Shield","Recharge","Poison","Drain","Magic Missile" ) );
+        assertEquals( 1289,fight2.fightResult());
+        assertEquals( -4,fight2.getBossHP() );
+        assertEquals( 2,fight2.getWizardHp() );
+    }
+
 
 
 
