@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
+test cases are made for the part one, maybe except the last one.
+In part one - player don't get -1 hp each turn!!!
+ */
 class FightTest {
     private Wizard wizard;
     private Fight fight;

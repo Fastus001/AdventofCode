@@ -1,7 +1,6 @@
 package com.karczmarzyk.advent2015.Day22;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Fight {
@@ -25,7 +24,6 @@ public class Fight {
 
     public void castSpell(String name)
     {
-//        System.out.println( "mana " + wizard.getManaPool() );
         switch (name)
         {
             case "Magic Missile": bossHP -= wizard.castMagicMissile() ;break;
@@ -65,11 +63,6 @@ public class Fight {
         }else{
             return -1;
         }
-//        }else if(wizard.getHP() <1)
-//        {
-//            return -1;
-//        }
-
     }
 
     public void addSpellList(List<String> spells)
@@ -79,8 +72,6 @@ public class Fight {
 //    true - fight goes on, false - boss or player lose
     public boolean bossRound()
     {
-//        System.out.println("\n-- Boss turn --");
-//        showContenders();
         checkEffects();
         if(bossHP < 1)
             return false;
@@ -89,11 +80,10 @@ public class Fight {
     //false - boss lose or end of mana
     public boolean playerRound()
     {
-//        System.out.println("\n-- Player turn --");
+        //TODO - part two only change!!!
         wizard.takeOneDamage();
         if(wizard.getHP()<1)
             return false;
-        showContenders();
         checkEffects();
         if(bossHP < 1)
             return false;
@@ -105,16 +95,9 @@ public class Fight {
         if(wizard.isAbleToCastSpell(spell))
         {
             castSpell( spell);
-
         }else
             return false;
         return wizard.getManaPool() >= 0;
-    }
-
-    public void showContenders()
-    {
-//        wizard.show();
-//        System.out.printf("\n- Boss has %d hit points\n",bossHP);
     }
 
     public void checkEffects()
@@ -128,37 +111,22 @@ public class Fight {
         if(rechargeEffect > 0)
         {
             --rechargeEffect;
-//            System.out.println("Recharge provides 101 mana; its timer is now " + --rechargeEffect);
             wizard.addMana();
-//            if(rechargeEffect == 0)
-//                System.out.println("Recharge wears off.");
         }
-
     }
 
     private void checkPoisonEffect() {
         if(poisonEffect>0) {
-//            System.out.print("Poison deals 3 damage.");
             bossHP -=3;
-            if(bossHP < 1) {
-//                System.out.println( "This kills the boss, and the player wins." );
-            }else{
                 --poisonEffect;
-//                System.out.println(" its timer is now " + --poisonEffect + ".");
             }
-//            if ( poisonEffect == 0 ) {
-//                System.out.println( "Poison wears off." );
-//            }
         }
-    }
 
     private void checkShieldEffect()
     {
         if(shieldEffect>0) {
             --shieldEffect;
-//            System.out.println( "Shield's timer is now " + --shieldEffect );
             if ( shieldEffect == 0 ) {
-//                System.out.println( "Shield wears off, decreasing armor by 7." );
                 wizard.setArmourZero();
             }
         }
