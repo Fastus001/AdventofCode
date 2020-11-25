@@ -47,7 +47,11 @@ public class Register {
         }
     }
 
-    public int getA() {
+    public int getRegisterNumber() {
         return a;
+    }
+
+    public void setRegisterNumber(int i) {
+        a = i;
     }
 }

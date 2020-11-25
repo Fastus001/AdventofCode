@@ -20,7 +20,7 @@ class RegisterTest {
     {
         int inc_a = register.executeInstruction( "inc a", 1 );
 
-        assertAll( ()->assertEquals( 1,register.getA() ),
+        assertAll( ()->assertEquals( 1,register.getRegisterNumber() ),
                    ()->assertEquals( 1,inc_a ));
     }
 
@@ -31,7 +31,7 @@ class RegisterTest {
             register.executeInstruction( "inc a", 1 );
         }
         register.executeInstruction( "hlf a", 1 );
-        assertEquals( 5, register.getA());
+        assertEquals( 5, register.getRegisterNumber());
     }
 
     @Test
@@ -40,7 +40,7 @@ class RegisterTest {
         register.executeInstruction( "inc a", 1 );
         register.executeInstruction( "tpl a",1 );
 
-        assertEquals( 3, register.getA());
+        assertEquals( 3, register.getRegisterNumber());
     }
 
     @Test
