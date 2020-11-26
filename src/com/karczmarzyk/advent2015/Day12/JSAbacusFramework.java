@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class JSAbacusFramework {
     public static final Pattern NUMS = Pattern.compile("(-?\\d+)");
+
     public static void main(String[] args) throws IOException {
         String tekst = new String(Files.readAllBytes(Path.of("src/com/karczmarzyk/advent2015/resources/day12.txt")));
 
@@ -56,7 +57,6 @@ public class JSAbacusFramework {
             if(input.charAt(i) == '}' && counter==0){
                 end = i+1;
                 tempSb.append(input.substring(start,end));
-                System.out.println(toCancel + " tempSb = " + tempSb);
                 input = input.replace(tempSb,"");
                 tempSb.replace(0,0+1,"[");
                 tempSb.replace(tempSb.length()-1,tempSb.length(),"]");

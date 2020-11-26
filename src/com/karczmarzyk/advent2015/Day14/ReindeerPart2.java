@@ -31,7 +31,6 @@ public class ReindeerPart2 {
 
     public static void getLongestDistanceReindeer(ArrayList<ReindeerVer2> reindeers, int number)
     {
-        ReindeerVer2 reindeerVer2 = new ReindeerVer2("",0,0,0);
         int max = 0;
         for (ReindeerVer2 r: reindeers) {
             if(r.distanceEachSecond.get(number)>max)
@@ -54,12 +53,9 @@ public class ReindeerPart2 {
             getLongestDistanceReindeer(reindeers, i);
         }
         Integer maxScore = reindeers.stream()
-                .map(reindeerVer2 -> reindeerVer2.getScore())
+                .map( ReindeerVer2::getScore )
                 .max(Integer::compareTo)
                 .orElse(-1);
         System.out.println("maxScore = " + maxScore);
-//        reindeers.get(0).showArray();
-//        reindeers.get(1).showArray();
-
     }
 }

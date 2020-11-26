@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.function.IntBinaryOperator;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -15,13 +14,7 @@ public class BitWiseAssembly {
     public static HashMap<String, IntBinaryOperator> operatorMap = new HashMap<>();
     public static ArrayList<Wire> wiresList = new ArrayList<>();
 
-
-    public static int twoBytesConcate(int a, int b)
-    {
-        return ((a << 8) | (b & 0xFF));
-    }
-
-    public static void getInput(ArrayList<String> l)
+    public static void getInput()
     {
         try(var in = new Scanner(new File("src/com/karczmarzyk/advent2015/resources/bitwise.txt")))
         {
@@ -39,8 +32,7 @@ public class BitWiseAssembly {
 
     public static void main(String[] args) {
         mappingOperators();
-        ArrayList<String> lines = new ArrayList<>();
-        getInput(lines);
+        getInput();
         for (ArrayList<String> t: BOOK) {
             Wire w = new Wire(t);
             wiresList.add(w);
@@ -51,10 +43,10 @@ public class BitWiseAssembly {
                 checkingNOT(w);
                 checkingRSHIFT(w);
                 checkingLeftSHIFT(w);
-                if(w.data.size()>1 && w.data.get(1).equals("AND"))
-                    andOrOperator(w,"AND");
-                if(w.data.size()>1 && w.data.get(1).equals("OR"))
-                    andOrOperator(w,"OR");
+                if(w.dataSize()>1 && w.dataGet(1).equals("AND"))
+                    andOrOperator(w,true);
+                if(w.dataSize()>1 && w.dataGet(1).equals("OR"))
+                    andOrOperator(w,false);
             }
         }
 
@@ -65,46 +57,21 @@ public class BitWiseAssembly {
 
         System.out.println("a = " + a);
 
-        long count = wiresList.stream().filter(Wire::isHasSignal).count();
-        System.out.println("lines = " + count);
-        short t = -25381;
-        int test = t;
-
-        System.out.println("test = " + test);
-        for (int i = 0; i <= 16; i++) {
-            test &= ~(1<<(32-i));
-        }
-        System.out.println("Integer.toBinaryString(test) = " + Integer.toBinaryString(test));
-        System.out.println("test = " + test);
-
-        int x = 123;
-        int h = ~x;
-        System.out.println("h = " + h);
-        int testNow = ~h;
-        System.out.println( "testNow = " + testNow );
-        for (int i = 0; i <= 16; i++) {
-            h &= ~(1 << (32 - i));
-        }
-
-
-        System.out.println("Integer.toBinaryString(test) = " + Integer.toBinaryString(test));
     }
 
-    private static void andOrOperator(Wire w, String andOr) {
+    private static void andOrOperator(Wire w, boolean and) {
         boolean first = false;
         boolean second = false;
-        String a = w.data.get(0);
-        String b = w.data.get(2);
         int numA = 0;
         int numB = 0;
         for(Wire find:wiresList)
         {
-            if(find.getIdentifier().equals(a) && find.isHasSignal())
+            if(find.getIdentifier().equals(w.dataGet(0)) && find.hasSignal())
             {
                 numA = find.giveSignal();
                 first = true;
             }
-            if(find.getIdentifier().equals(b) && find.isHasSignal())
+            if(find.getIdentifier().equals(w.dataGet(2)) && find.hasSignal())
             {
                 numB = find.giveSignal();
                 second = true;
@@ -112,91 +79,76 @@ public class BitWiseAssembly {
         }
         if(numA == 0)
         {
-            if(w.data.get(0).matches("1"))
+            if(w.dataGet(0).matches("\\d+"))
             {
-                numA = Integer.parseInt(w.data.get(0));
+                numA = Integer.parseInt(w.dataGet(0));
                 first = true;
-//                System.out.println("numA = " + numA + " B " + numB);
             }
         }
         if(first && second)
         {
-            if(andOr.equals("AND"))
+            if(and)
                 w.setSignal(numA & numB);
-            if(andOr.equals("OR"))
+            else
                 w.setSignal(numA | numB);
         }
-
     }
 
     private static void checkingLeftSHIFT(Wire w) {
-        if(w.data.size()>1 && w.data.get(1).equals("LSHIFT"))
-        {
-            String a = w.data.get(0);
-            int b = Integer.parseInt(w.data.get(2));
-            int num = 0;
-            for(Wire find:wiresList)
-            {
-                if(find.getIdentifier().equals(a) && find.isHasSignal())
-                {
-                    num = find.giveSignal();
-                    w.setSignal((num<<b));
-                }
-            }
-        }
-
+        if(w.dataSize()>1 && w.dataGet(1).equals("LSHIFT"))
+            insideJob( w,true );
     }
 
     private static void checkingRSHIFT(Wire w) {
-        if(w.data.size()>1 && w.data.get(1).equals("RSHIFT"))
+        if(w.dataSize()>1 && w.dataGet(1).equals("RSHIFT"))
+            insideJob( w,false );
+    }
+
+    private static void insideJob(Wire w, boolean lShift)
+    {
+        for(Wire find:wiresList)
         {
-            String a = w.data.get(0);
-            int  b = Integer.parseInt(w.data.get(2));
-            int num = 0;
-            for(Wire find:wiresList)
+            if(find.getIdentifier().equals(w.dataGet(0)) && find.hasSignal())
             {
-                if(find.getIdentifier().equals(a) && find.isHasSignal())
-                {
-                    num = find.giveSignal();
+                int  b = Integer.parseInt(w.dataGet(2));
+                int num = find.giveSignal();
+                if(lShift)
+                    w.setSignal((num<<b));
+                else
                     w.setSignal((num>>b));
-                }
             }
         }
     }
 
     private static void checkingNOT(Wire w) {
-        if(w.data.get(0).equals("NOT"))
+        if(w.dataGet(0).equals("NOT"))
         {
-            String b = w.data.get(1);
-            int num = 0;
+            String b = w.dataGet(1);
             for(Wire find:wiresList)
             {
-                if(find.getIdentifier().equals(b) && find.isHasSignal())
+                if(find.getIdentifier().equals(b) && find.hasSignal())
                 {
-                    num = find.giveSignal();
+                    int num = find.giveSignal();
                     w.setSignal(~num);
                 }
             }
         }
     }
 
-
     private static void checkSingleSignal(Wire w) {
-        if(w.getDataSize()==1 && !w.isHasSignal())
+        if(w.getDataSize()==1 && !w.hasSignal())
         {
-            String s = w.data.get(0);
+            String s = w.dataGet(0);
             if(NUM.matcher(s).find())
                 w.setSignal(Integer.parseInt(s));
             else if(s.equals("lx"))
             {
                 for(Wire wire:wiresList)
-                    if(wire.getIdentifier().equals(s) && wire.isHasSignal())
+                    if(wire.getIdentifier().equals(s) && wire.hasSignal())
                     {
-                        int num = wire.giveSignal();
-                        w.setSignal(num);
+                        w.setSignal(wire.giveSignal());
                     }
             }
-
         }
     }
 
@@ -211,54 +163,3 @@ public class BitWiseAssembly {
 
 }
 
-class Wire
-{
-    private final String identifier;
-    private int signal;
-    private boolean hasSignal;
-    public ArrayList<String> data;
-
-    Wire(ArrayList<String> data)
-    {
-        this.identifier = data.get(data.size()-1);
-        data.remove(data.size()-1);
-        data.remove(data.size()-1);
-        this.data = data;
-        this.hasSignal = false;
-    }
-
-    public void setSignal(int signal)
-    {
-        this.signal = signal;
-        this.hasSignal = true;
-    }
-
-    public int giveSignal()
-    {
-        return signal;
-    }
-
-    public boolean isHasSignal() {
-        return hasSignal;
-    }
-
-    public int getDataSize(){return this.data.size();}
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setHasSignal(boolean hasSignal) {
-        this.hasSignal = hasSignal;
-    }
-
-    @Override
-    public String toString() {
-        return "Wire{" +
-                "identifier='" + identifier + '\'' +
-                ", signal=" + signal +
-                ", hasSignal=" + hasSignal +
-                ", data=" + data +
-                '}';
-    }
-}

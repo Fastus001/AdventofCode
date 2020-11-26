@@ -28,9 +28,7 @@ public class ElvesLook {
             System.out.println("result - licznik = "+licznik + " - " + resultString.length());
             convertStringToListOfStrings(result.toString());
         }
-
     }
-
 }
 
 class Sequence{

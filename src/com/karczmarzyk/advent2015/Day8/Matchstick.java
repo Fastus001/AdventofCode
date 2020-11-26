@@ -12,7 +12,6 @@ public class Matchstick {
     public static final Pattern DBLBACKSL = Pattern.compile("\\\\\\\\");
     public static final Pattern APOST = Pattern.compile("\\\\\\\"");
     public static final Pattern SIN_APOST = Pattern.compile("\\\"");
-    public static final Pattern WSPACES = Pattern.compile("\\s+");
 
     public static ArrayList<String> IN_LIST = new ArrayList<>();
 
@@ -49,21 +48,13 @@ public class Matchstick {
         IN_LIST.replaceAll(s -> APOST.matcher(s).replaceAll("ssss"));
         IN_LIST.replaceAll(s -> SIN_APOST.matcher(s).replaceAll("bbb"));
         IN_LIST.replaceAll(s -> HEX.matcher(s).replaceAll("HHHHH"));
-//        IN_LIST.replaceAll(s -> WSPACES.matcher(s).replaceAll(""));
         long count2 = IN_LIST.stream().map(String::length).reduce(Integer::sum).orElse(0);
 
         System.out.println("count = " + count);
         System.out.println("count2 = " + count2);
 
         System.out.println("sum = " + (count-count2));
-//        IN_LIST.forEach(System.out::println);
 
     }
 
-    private static String getHexValue(MatchResult matchResult) {
-        char [] tab = matchResult.group(1).toCharArray();
-        String toGex = tab[2] +String.valueOf(tab[3]);
-        char ch = (char) Integer.parseInt(toGex,16);
-        return String.valueOf(ch);
-    }
 }

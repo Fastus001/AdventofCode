@@ -2,7 +2,7 @@ package com.karczmarzyk.advent2015.Day15;
 
 import java.util.ArrayList;
 
-public class ScienceforHungryPeople {
+public class ScienceForHungryPeople {
     public static ArrayList<Long> PERMUTATIONS = new ArrayList<>();
     public  static Ingredient sprinkles = new Ingredient("Sprinkles",5,-1,0,0,5);
     public  static Ingredient peanutButter = new Ingredient("PeanutButter",-1,3,0,0,1);

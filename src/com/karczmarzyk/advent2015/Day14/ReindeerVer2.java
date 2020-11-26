@@ -47,7 +47,6 @@ public class ReindeerVer2 {
                     fl =1;
                     rst = 1;
                 }
-
             }
             seconds--;
         }

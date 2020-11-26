@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public class ReindeerOlympics {
@@ -17,8 +18,7 @@ public class ReindeerOlympics {
             while (in.hasNext())
             {
                 Reindeer reindeer = REIND.matcher(in.nextLine()).results()
-                        .map(mr -> new Reindeer(mr.group(1), Integer.parseInt(mr.group(2)),
-                                Integer.parseInt(mr.group(3)), Integer.parseInt(mr.group(4))))
+                        .map(ReindeerOlympics::makeNewReinder)
                         .findFirst()
                         .orElseThrow();
                 reindeers.add(reindeer);
@@ -37,5 +37,11 @@ public class ReindeerOlympics {
                 .orElseThrow();
         System.out.println("integer max = " + maxDistance);
 
+    }
+
+    public static Reindeer makeNewReinder(MatchResult mr)
+    {
+        return new Reindeer( mr.group(1), Integer.parseInt(mr.group(2)),
+                             Integer.parseInt(mr.group(3)), Integer.parseInt(mr.group(4) ));
     }
 }

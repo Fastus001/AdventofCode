@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -29,15 +28,13 @@ public class AuntSue {
     public static boolean isCatsOtherThanSeven(String pattern)
     {
         String pat = "cats";
-        String fullPat = "cats: 7";
         if(pattern.contains(pat))
         {
             String s = CATS.matcher(pattern)
-                    .results().map(matchResult -> matchResult
-                            .group(2)).findFirst()
-                    .orElse("-1");
-            int number = Integer.parseInt(s);
-            return number>7;
+                        .results().map(matchResult -> matchResult
+                        .group(2)).findFirst()
+                        .orElse("-1");
+            return Integer.parseInt(s)>7;
         }
         return true;
     }
@@ -61,8 +58,7 @@ public class AuntSue {
                     .results().map(matchResult -> matchResult
                             .group(2)).findFirst()
                     .orElse("-1");
-            int number = Integer.parseInt(s);
-            return number<3;
+            return Integer.parseInt(s)<3;
         }
         return true;
     }

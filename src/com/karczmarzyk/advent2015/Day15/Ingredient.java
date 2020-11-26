@@ -1,16 +1,14 @@
 package com.karczmarzyk.advent2015.Day15;
 
 public class Ingredient {
-    private String name;
-    private int capacity;
-    private int durability;
-    private int flavor;
-    private int texture;
-    private int calories;
+    private final int capacity;
+    private final int durability;
+    private final int flavor;
+    private final int texture;
+    private final int calories;
 
 
     public Ingredient(String name, int capacity, int durability, int flavor, int texture, int calories) {
-        this.name = name;
         this.capacity = capacity;
         this.durability = durability;
         this.flavor = flavor;
