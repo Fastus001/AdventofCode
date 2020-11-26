@@ -62,6 +62,7 @@ public class BitWiseAssembly {
                 .filter(wire -> wire.getIdentifier().equals("a"))
                 .collect(Collectors.toList());
 
+
         System.out.println("a = " + a);
 
         long count = wiresList.stream().filter(Wire::isHasSignal).count();
@@ -79,10 +80,13 @@ public class BitWiseAssembly {
         int x = 123;
         int h = ~x;
         System.out.println("h = " + h);
+        int testNow = ~h;
+        System.out.println( "testNow = " + testNow );
         for (int i = 0; i <= 16; i++) {
             h &= ~(1 << (32 - i));
         }
-        System.out.println("h = " + h);
+
+
         System.out.println("Integer.toBinaryString(test) = " + Integer.toBinaryString(test));
     }
 
@@ -91,8 +95,8 @@ public class BitWiseAssembly {
         boolean second = false;
         String a = w.data.get(0);
         String b = w.data.get(2);
-        short numA = 0;
-        short numB = 0;
+        int numA = 0;
+        int numB = 0;
         for(Wire find:wiresList)
         {
             if(find.getIdentifier().equals(a) && find.isHasSignal())
@@ -110,7 +114,7 @@ public class BitWiseAssembly {
         {
             if(w.data.get(0).matches("1"))
             {
-                numA = Short.parseShort(w.data.get(0));
+                numA = Integer.parseInt(w.data.get(0));
                 first = true;
 //                System.out.println("numA = " + numA + " B " + numB);
             }
@@ -118,9 +122,9 @@ public class BitWiseAssembly {
         if(first && second)
         {
             if(andOr.equals("AND"))
-                w.setSignal((short)(numA & numB));
+                w.setSignal(numA & numB);
             if(andOr.equals("OR"))
-                w.setSignal((short)(numA | numB));
+                w.setSignal(numA | numB);
         }
 
     }
@@ -129,14 +133,14 @@ public class BitWiseAssembly {
         if(w.data.size()>1 && w.data.get(1).equals("LSHIFT"))
         {
             String a = w.data.get(0);
-            short b = Short.parseShort(w.data.get(2));
-            short num = 0;
+            int b = Integer.parseInt(w.data.get(2));
+            int num = 0;
             for(Wire find:wiresList)
             {
                 if(find.getIdentifier().equals(a) && find.isHasSignal())
                 {
                     num = find.giveSignal();
-                    w.setSignal((short)(num<<b));
+                    w.setSignal((num<<b));
                 }
             }
         }
@@ -147,14 +151,14 @@ public class BitWiseAssembly {
         if(w.data.size()>1 && w.data.get(1).equals("RSHIFT"))
         {
             String a = w.data.get(0);
-            short b = Short.parseShort(w.data.get(2));
-            short num = 0;
+            int  b = Integer.parseInt(w.data.get(2));
+            int num = 0;
             for(Wire find:wiresList)
             {
                 if(find.getIdentifier().equals(a) && find.isHasSignal())
                 {
                     num = find.giveSignal();
-                    w.setSignal((short)(num>>b));
+                    w.setSignal((num>>b));
                 }
             }
         }
@@ -164,13 +168,13 @@ public class BitWiseAssembly {
         if(w.data.get(0).equals("NOT"))
         {
             String b = w.data.get(1);
-            short num = 0;
+            int num = 0;
             for(Wire find:wiresList)
             {
                 if(find.getIdentifier().equals(b) && find.isHasSignal())
                 {
                     num = find.giveSignal();
-                    w.setSignal((short)~num);
+                    w.setSignal(~num);
                 }
             }
         }
@@ -182,13 +186,13 @@ public class BitWiseAssembly {
         {
             String s = w.data.get(0);
             if(NUM.matcher(s).find())
-                w.setSignal(Short.parseShort(s));
+                w.setSignal(Integer.parseInt(s));
             else if(s.equals("lx"))
             {
                 for(Wire wire:wiresList)
                     if(wire.getIdentifier().equals(s) && wire.isHasSignal())
                     {
-                        short num = wire.giveSignal();
+                        int num = wire.giveSignal();
                         w.setSignal(num);
                     }
             }
@@ -210,7 +214,7 @@ public class BitWiseAssembly {
 class Wire
 {
     private final String identifier;
-    private short signal;
+    private int signal;
     private boolean hasSignal;
     public ArrayList<String> data;
 
@@ -223,13 +227,13 @@ class Wire
         this.hasSignal = false;
     }
 
-    public void setSignal(short signal)
+    public void setSignal(int signal)
     {
         this.signal = signal;
         this.hasSignal = true;
     }
 
-    public short giveSignal()
+    public int giveSignal()
     {
         return signal;
     }
