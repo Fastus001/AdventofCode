@@ -5,19 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Generator {
-    private final List<Integer> numbers;
+    private final List<Long> numbers;
 
 
-    public Generator(List<Integer> numbers) {
+    public Generator(List<Long> numbers) {
         this.numbers = numbers;
     }
 
-    private void helper(List<int[]> combinations, int[] data, int start, int end, int index)
+    private void helper(List<List<Long>> combinations, Long[] data, int start, int end, int index)
     {
         if(index== data.length)
         {
-            int[] combination = data.clone();
-            int sum = Arrays.stream( combination).sum();
+            List<Long> combination = List.of(data);
+            Long sum = combination.stream().reduce( Long::sum ).orElseThrow();
             if (sum==520){
                 combinations.add(combination);
             }
@@ -28,10 +28,10 @@ public class Generator {
         }
     }
 
-    public List<int[]> generate(int k)
+    public List<List<Long>> generate(int k)
     {
-        List<int[]> combinations = new ArrayList<>();
-        helper(combinations, new int[k], 0, numbers.size() -1,0);
+        List<List<Long>> combinations = new ArrayList<>();
+        helper(combinations, new Long[k], 0, numbers.size() -1,0);
         return combinations;
     }
 }
