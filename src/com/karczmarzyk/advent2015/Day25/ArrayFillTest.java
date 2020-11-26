@@ -9,9 +9,11 @@ class ArrayFillTest {
     @Test
     public void testClassArrayFill()
     {
-        ArrayFill arrayFill = new ArrayFill();
-        arrayFill.fillFirstTen();
-        arrayFill.showTab();
+        ArrayFill fill = new ArrayFill();
+        fill.fillFirstTen();
+//        fill.showTab();
+
+        assertEquals( 8997277,fill.getResult() );
     }
 
 }
