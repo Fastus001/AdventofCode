@@ -1,11 +1,12 @@
 package com.karczmarzyk.advent2015.Day24;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Generator {
     private final List<Long> numbers;
+    // for the part 1 - need to be 520!!
+    private static final int SUM = 390;
 
 
     public Generator(List<Long> numbers) {
@@ -18,7 +19,7 @@ public class Generator {
         {
             List<Long> combination = List.of(data);
             Long sum = combination.stream().reduce( Long::sum ).orElseThrow();
-            if (sum==520){
+            if (sum==SUM){
                 combinations.add(combination);
             }
         }else if(start <= end){

@@ -9,34 +9,34 @@ import java.util.stream.Collectors;
 
 public class Balance {
     public static final List<Long> NUMBERS = new ArrayList<>();
-    public static final int K = 6;
+    public static final int K = 4;
 
-
+    //part 1 - only three groups, need one filter only and the weight is 520 for each group
+    // part 2 - four groups, need two filters used and the weight of each group is 390
     public static void main(String[] args) {
         Balance.getInput();
         Generator balance = new Generator(NUMBERS);
         List<List<Long>> combinations = balance.generate(K);
 
-        List<List<Long>> result = combinations.stream()
+        System.out.println( "combinations.size() = " + combinations.size() );
+
+        List<List<Long>> resultOne = combinations.stream()
+                .filter( Balance::checkIfPossibleToPlacePackages )
                 .filter( Balance::checkIfPossibleToPlacePackages )
                 .collect( Collectors.toList() );
-//        for(List<Long> in :result)
-//        {
-//            System.out.println( "Arrays.toString( in = " + in );
-//        }
-        System.out.println( "result = " + result.size() );
-        long minQuantumEnt = result.stream()
+
+        long minQuantumEntanglement = resultOne.stream()
                 .mapToLong( Balance::quantumEntanglement )
                 .min()
                 .orElseThrow();
-        System.out.println( "minQuantumEnt = " + minQuantumEnt );
-
-
+        System.out.println( "minQuantumEntanglement = " + minQuantumEntanglement );
     }
 
     private static long quantumEntanglement(List<Long> list)
     {
-        return list.stream().reduce( ((aLong, aLong2) -> aLong*aLong2)).orElseThrow();
+        return list.stream()
+                .reduce( ((aLong, aLong2) -> aLong*aLong2))
+                .orElseThrow();
     }
 
     private static boolean checkIfPossibleToPlacePackages(List<Long> list)
