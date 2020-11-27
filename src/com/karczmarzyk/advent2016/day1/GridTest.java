@@ -18,7 +18,6 @@ class GridTest {
     {
         grid.getCoordinates( "R2" );
         assertEquals( "East",grid.getDirectionName() );
-        assertEquals( 2,grid.getX() );
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.karczmarzyk.advent2016.day1;
 
+
 public class Taxicab {
     private static final String INPUT = "R3, L2, L2, R4, L1, R2, R3, R4, L2, R4, L2, L5, L1, R5, R2, R2, L1, R4, R1," +
             " L5, L3, R4, R3, R1, L1, L5, L4, L2, R5, L3, L4, R3, R1, L3, R1, L3, R3, L4, R2, R5, L190, R2, L3, R47," +
@@ -8,13 +9,17 @@ public class Taxicab {
             " R4, R5, L2, L5, L4, L1, R4, L4, R4, L4, R1, R5, L1, R1, L5, R5, R1, R1, L3, L1, R4, L1, L4, L4, L3, R1," +
             " R4, R1, R1, R2, L5, L2, R4, L1, R3, L5, L2, R5, L4, R5, L5, R3, R4, L3, L3, L2, R2, L5, L5, R3, R4, R3," +
             " R4, R3, R1";
+
     public static void main(String[] args) {
         String [] tab = INPUT.split( ", " );
         Grid grid = new Grid();
-        for (int i = 0; i < tab.length; i++) {
-            grid.getCoordinates( tab[i] );
+        int distance = 0;
+        for (String s : tab) {
+            distance = grid.getCoordinates( s );
+            if ( distance > 0 )
+                break;
         }
-        int distance = grid.getDistance();
         System.out.println( "distance = " + distance );
+
     }
 }
