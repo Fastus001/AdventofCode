@@ -17,8 +17,10 @@ public class SquareThreeSides {
         {
             while (in.hasNext())
             {
-                if(Triangle.isItTriangle( in.nextLine() ))
-                    counter++;
+//                if(Triangle.isItTriangle( in.nextLine() )) - part 1
+//                    counter++;
+                String temp = in.nextLine()+" "+in.nextLine()+" "+in.nextLine();
+                counter +=TriangleVertically.addLine( temp );
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
