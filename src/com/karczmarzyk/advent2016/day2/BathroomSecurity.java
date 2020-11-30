@@ -8,16 +8,19 @@ import java.util.Scanner;
 
 public class BathroomSecurity {
 
-
+/*
+Part 1 - output goes to the Integer list
+Part 2 - output goes to the String
+ */
     public static void main(String[] args) {
         List<String> input = BathroomSecurity.getInput();
         PinPad2 pinPad2 = new PinPad2();
-        List<String> password = new ArrayList<>();
+        String password = "";
         for(String s: input)
         {
-                password.add( pinPad2.getString( s ) );
+                password = password.concat( pinPad2.getString( s ));
         }
-        System.out.println( "password = " + password );
+        System.out.println( "password = " + password);
     }
 
     private static List<String> getInput() {

@@ -1,7 +1,5 @@
 package com.karczmarzyk.advent2016.day2;
 
-import java.util.Arrays;
-
 public class PinPad2 {
     private  String [] pinPad2 = new String[5];
     private int x = 0;
@@ -53,14 +51,7 @@ public class PinPad2 {
         char [] tab = ull.toCharArray();
         for (char c : tab) {
             getMove( c );
-//            System.out.println(getCurrentChar());
         }
-
         return pinPad2[y].substring( x, x+1);
-    }
-
-    public char getCurrentChar()
-    {
-        return pinPad2[y].charAt( x );
     }
 }

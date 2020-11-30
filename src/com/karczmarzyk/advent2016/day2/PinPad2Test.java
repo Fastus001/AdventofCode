@@ -18,11 +18,10 @@ class PinPad2Test {
     public void testClassPinPad2()
     {
         pinPad2.show();
-        System.out.println(pinPad2.getCurrentChar());
     }
 
     @Test
-    public void shouldNotMoveAfterULL()
+    public void testCasesFromTheTask()
     {
         assertEquals( "5", pinPad2.getString( "ULL" ));
         assertEquals( "D", pinPad2.getString( "RRDDD" ));

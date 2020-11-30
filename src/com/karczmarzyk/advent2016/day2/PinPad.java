@@ -13,7 +13,6 @@ public class PinPad {
             for (int j = 0; j < pinPad.length; j++) {
                 pinPad[i][j] = ++counter;
             }
-
         }
     }
 
@@ -45,9 +44,7 @@ public class PinPad {
         char [] tab = ull.toCharArray();
         for (char c : tab) {
             getMove( c );
-
         }
-
         return pinPad[y][x];
     }
 
