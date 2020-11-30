@@ -11,11 +11,11 @@ public class BathroomSecurity {
 
     public static void main(String[] args) {
         List<String> input = BathroomSecurity.getInput();
-        PinPad pinPad = new PinPad();
-        List<Integer> password = new ArrayList<>();
+        PinPad2 pinPad2 = new PinPad2();
+        List<String> password = new ArrayList<>();
         for(String s: input)
         {
-                password.add( pinPad.getString( s ) );
+                password.add( pinPad2.getString( s ) );
         }
         System.out.println( "password = " + password );
     }

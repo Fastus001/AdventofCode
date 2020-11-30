@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 public class PinPad {
     private final int [][] pinPad = new int[3][3];
-    private int x = 1;
-    private int y = 1;
+    private int x = 0;
+    private int y = 2;
 
     public PinPad() {
         int counter = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < pinPad.length; i++) {
+            for (int j = 0; j < pinPad.length; j++) {
                 pinPad[i][j] = ++counter;
             }
-            
+
         }
     }
 
