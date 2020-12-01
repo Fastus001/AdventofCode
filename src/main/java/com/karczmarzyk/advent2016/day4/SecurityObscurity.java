@@ -17,8 +17,11 @@ public class SecurityObscurity {
         {
             while (in.hasNext())
             {
-                Room room = new Room( in.nextLine() );
-                sum+= room.getID();
+//                Room room = new Room( in.nextLine() );
+//                sum+= room.getID();
+                RoomCipher room = new RoomCipher( in.nextLine() );
+                String test = room.decipher();
+                System.out.println( "test + room.getID() = " + test + room.getID() );
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
