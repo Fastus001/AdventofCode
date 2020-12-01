@@ -11,7 +11,7 @@ class RoomTest {
     {
         Room room = new Room( "aaaaa-bbb-z-y-x-123[abxyz]" );
         room.show();
-        assertTrue( room.testRoom( room.mapChars() ) );
+        assertTrue( room.testRoom( room.mapChars2() ) );
     }
 
     @Test
@@ -19,7 +19,7 @@ class RoomTest {
     {
         Room room = new Room( "a-b-c-d-e-f-g-h-987[abcde]" );
         room.show();
-        assertTrue( room.testRoom( room.mapChars() ) );
+        assertTrue( room.testRoom( room.mapChars2() ) );
     }
 
     @Test
@@ -27,7 +27,7 @@ class RoomTest {
     {
         Room room = new Room( "not-a-real-room-404[oarel]" );
         room.show();
-        String test = room.mapChars();
+        String test = room.mapChars2();
         System.out.println( "test = " + test );
         assertTrue( room.testRoom( test ) );
     }
@@ -37,7 +37,7 @@ class RoomTest {
     {
         Room room = new Room( "totally-real-room-200[decoy]" );
         room.show();
-        String test = room.mapChars();
+        String test = room.mapChars2();
         System.out.println( "test = " + test );
         assertFalse( room.testRoom( test ) );
     }
@@ -54,10 +54,10 @@ class RoomTest {
     @Test
     void testSamples()
     {
-        Room room = new Room( "oknkvcta-itcfg-gii-wugt-vguvkpi-154[giktv]" );
+        Room room = new Room( "jyfvnlupj-ibuuf-svnpzapjz-851[gmsnf]" );
         room.show();
         System.out.println( "room.mapChars2() = " + room.mapChars2() );
-        String test = room.mapChars();
+        String test = room.mapChars2();
         System.out.println( "test = " + test );
         assertFalse( room.testRoom( test ) );
     }

@@ -26,12 +26,11 @@ public class Room {
         String test = mapChars2();
         if(testRoom( test ))
         {
-            System.out.println( "input = " + input );
             return Integer.parseInt( input.get( 1 ) );
         }
         else
         {
-
+            System.out.println( "input = " + input );
             return 0;
         }
 
@@ -41,48 +40,9 @@ public class Room {
     {
         if(mapChars.substring( 0,5 ).equals( input.get( 2 ) ))
             return true;
-//        else {
-//            int counter = 0;
-//            String pattern = input.get( 2 );
-//            for (int i = 0; i < pattern.length(); i++) {
-//                if(pattern.charAt( i ) == mapChars.charAt( i ))
-//                {
-//                    counter++;
-//                }
-//                else
-//                {
-//                    for (int j = i; j < mapChars.length(); j++) {
-//                        if(pattern.charAt( i ) == mapChars.charAt( j )){
-//                            counter++;
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//            return counter == 5;
-//        }
         return false;
     }
 
-    public String mapChars()
-    {
-        List<String> list = Collections.singletonList( input.get( 0 ) );
-        Map<Character, Long> collect =
-                list.stream()
-                        .flatMap( s -> s.chars().mapToObj( c -> ( char ) c ) )
-                        .collect( groupingBy( Function.identity(), counting() ) );
-
-        List<Map.Entry<Character,Long>> temp = new ArrayList<>(collect.entrySet());
-
-        temp.sort( Entry.comparingByValue(Comparator.reverseOrder()) );
-
-        StringBuilder sb = new StringBuilder();
-        for(Map.Entry<Character,Long> e:temp)
-        {
-            sb.append( e.getKey());
-        }
-        return sb.toString();
-    }
 
     public void show() {
         System.out.println( "input = " + input );
