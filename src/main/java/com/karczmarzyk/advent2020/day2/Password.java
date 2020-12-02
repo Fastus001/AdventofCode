@@ -25,11 +25,19 @@ public class Password {
         char c = input.get( 2 ).charAt( 0 );
         char [] tab = input.get( 3 ).toCharArray();
         int counter = 0;
+
+        /*
+        Part 1
         for (int i = 0; i < tab.length; i++) {
             if(tab[i] == c)
                 counter++;
         }
-        return counter >=min && counter <=max;
+        return counter >=min && counter <=max;*/
+
+        if(tab[min-1] == c && tab[max-1] == c){
+            return false;
+        }
+        else return tab[min - 1] == c || tab[max - 1] == c;
     }
 
     private Stream<String> groups(MatchResult mr) {
