@@ -1,4 +1,4 @@
-package com.karczmarzyk.advent2020;
+package com.karczmarzyk.advent2020.day1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
