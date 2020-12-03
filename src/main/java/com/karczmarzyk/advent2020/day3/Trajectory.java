@@ -7,23 +7,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Trajectory {
-    private List<String> list = new ArrayList<>();
-    private int startX = 0;
-    private int counter = 0;
+    private final List<String> list = new ArrayList<>();
 
-    public int getCounter() {
-        return counter;
-    }
-
-    public void traverse()
+    public int getTreeNumber(int x, int y)
     {
-        for (int i = 1; i < list.size(); i++) {
-             startX +=3;
-            if(startX>list.get( i ).length()-1)
+        int startX = 0;
+        int counter = 0;
+        for (int i = 1; i < list.size(); i+=y) {
+             startX +=x;
+            if( startX >list.get( i ).length()-1)
                 startX -= list.get( i ).length();
             if(list.get( i ).charAt( startX ) == '#')
                 counter++;
         }
+        return counter;
     }
 
     public void getInput(String path){
