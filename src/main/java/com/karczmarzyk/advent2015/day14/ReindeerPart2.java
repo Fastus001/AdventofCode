@@ -1,5 +1,7 @@
 package com.karczmarzyk.advent2015.day14;
 
+import com.karczmarzyk.advent2015.day14.ReindeerVer2;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
