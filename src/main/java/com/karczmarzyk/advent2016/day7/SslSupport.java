@@ -41,7 +41,7 @@ public class SslSupport {
                 .map( MatchResult::group )
                 .collect( Collectors.joining() );
 
-        String rest = BRACKETS.matcher( input ).replaceAll( "-" );
+        String rest = BRACKETS.matcher( input ).replaceAll( "-=" );
 
         Matcher matcher = ABA_EXT.matcher( rest );
         if( matcher.find() ){
