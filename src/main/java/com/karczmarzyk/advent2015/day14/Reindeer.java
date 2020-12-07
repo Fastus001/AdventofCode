@@ -6,7 +6,7 @@ public class Reindeer {
     private final int flyTime;
     private final int restTime;
 
-    Reindeer(String name, int speed, int flyTime, int restTime)
+    public Reindeer(String name, int speed, int flyTime, int restTime)
     {
         this.name = name;
         this.speed = speed;

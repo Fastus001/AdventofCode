@@ -1,5 +1,6 @@
 package com.karczmarzyk.advent2015.day14;
 
+import com.karczmarzyk.advent2015.day14.Reindeer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

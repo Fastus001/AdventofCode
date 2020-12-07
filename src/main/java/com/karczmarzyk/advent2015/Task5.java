@@ -78,7 +78,7 @@ public class Task5 {
         task.readInput();
         Predicate<String> predicate2 = DLETTERS.asPredicate();
         var predicate3 = NOT_ALLOWED.asPredicate().negate();
-        /*pierwsza czêœæ zadania
+        /*pierwsza cz?? zadania
         List<String> collect = task.lista.stream()
                 .filter(predicate2)
                 .filter(predicate3)
