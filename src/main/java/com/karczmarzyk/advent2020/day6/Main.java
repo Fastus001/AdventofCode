@@ -10,11 +10,14 @@ public class Main {
         InputConverter converter = new InputConverter();
         converter.getInput( "src/main/resources/2020/day6/day6.txt" );
         List<String> list = converter.getList();
-        int sum = 0;
+        int partOne = 0;
+        int partTwo = 0;
         for(String s:list)
         {
-            sum += Custom.countCustomQuestions( s );
+            partOne += Custom.countCustomQuestions( s );
+            partTwo +=CustomAdvanced.getInput( s );
         }
-        System.out.println( "sum = " + sum );
+        System.out.println( "partOne = " + partOne );
+        System.out.println( "partTwo = " + partTwo );
     }
 }

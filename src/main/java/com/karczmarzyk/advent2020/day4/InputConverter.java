@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class InputConverter {
     private final List<String> list = new ArrayList<>();
 
+    //sb.append( temp )/*.append( " " ) turned off for day 6 2020*/;
     public void getInput(String path)
     {
         try(var in = new Scanner( new File( path ) ))
@@ -19,7 +20,7 @@ public class InputConverter {
             {
                 String temp = in.nextLine();
                 if(temp.length()!=0)
-                    sb.append( temp )/*.append( " " ) turned off for day 6 2020*/;
+                    sb.append( temp ).append( " " );
                 else
                 {
                     list.add( sb.toString() );
