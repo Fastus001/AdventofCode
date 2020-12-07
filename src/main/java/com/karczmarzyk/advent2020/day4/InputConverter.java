@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class InputConverter {
     private final List<String> list = new ArrayList<>();
 
@@ -18,7 +19,7 @@ public class InputConverter {
             {
                 String temp = in.nextLine();
                 if(temp.length()!=0)
-                    sb.append( temp ).append( " " );
+                    sb.append( temp )/*.append( " " ) turned off for day 6 2020*/;
                 else
                 {
                     list.add( sb.toString() );
