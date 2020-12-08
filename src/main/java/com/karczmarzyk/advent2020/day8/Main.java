@@ -15,7 +15,7 @@ public class Main {
             if(!list.get( step ).isVisited())
                 step += list.get( step ).executeInstruction();
             else if(list.get( step ).isVisited()){
-                System.out.println( "list.get( 0 ).getAccumulator() = " + list.get( 0 ).getAccumulator() );
+                System.out.println( "list.get( 0 ).getAccumulator() = " + Instruction.getAccumulator() );
                 break;
             }
                 

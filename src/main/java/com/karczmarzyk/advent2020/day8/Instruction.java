@@ -3,7 +3,7 @@ package com.karczmarzyk.advent2020.day8;
 public class Instruction {
     private static int accumulator = 0;
     private String operation;
-    private int argument;
+    private final int argument;
     private boolean visited = false;
 
     public Instruction(String operation, int argument) {
@@ -27,7 +27,7 @@ public class Instruction {
         }
     }
 
-    public int getAccumulator() {
+    public static int getAccumulator() {
         return accumulator;
     }
 
@@ -35,4 +35,21 @@ public class Instruction {
     {
         return visited;
     }
+
+    public static void setAccumulator(int accumulator) {
+        Instruction.accumulator = accumulator;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public void swap() {
+        if(operation.equals( "jmp" )){
+            operation ="nop";
+        }else if(operation.equals( "nop" )){
+            operation = "jmp";
+        }
+    }
+
 }
