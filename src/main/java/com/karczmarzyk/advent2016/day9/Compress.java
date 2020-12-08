@@ -31,7 +31,12 @@ public class Compress {
         list.add( in.substring( matchResult.end() + length ) );
 
         for (String s : list) {
-            decrypt( s );
+            if(s.contains( "(" ))
+                decrypt( s );
+            else
+            {
+                sum+=s.length();
+            }
         }
 
 
