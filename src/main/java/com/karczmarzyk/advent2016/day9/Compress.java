@@ -24,7 +24,7 @@ public class Compress {
         int length = Integer.parseInt( xes[0] );
         int multipleBy = Integer.parseInt( xes[1] );
 
-        sum += in.substring( 0, matchResult.start() ).length();
+        sum += matchResult.start();
         for (int i = 0; i < multipleBy; i++) {
             list.add( in.substring( matchResult.end(), matchResult.end() + length ) );
         }
