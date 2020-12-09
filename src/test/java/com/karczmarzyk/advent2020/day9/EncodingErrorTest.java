@@ -3,7 +3,8 @@ package com.karczmarzyk.advent2020.day9;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EncodingErrorTest {
     EncodingError error;
@@ -12,12 +13,6 @@ class EncodingErrorTest {
     void setUp() {
         error = new EncodingError( 5 );
 
-    }
-
-    @Test
-    void setList() {
-        error.setList( "src/main/resources/2020/day9/test.txt");
-        assertEquals( 20, error.getListSize());
     }
 
     @Test

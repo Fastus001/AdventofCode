@@ -47,10 +47,6 @@ public class EncodingError {
         return false;
     }
 
-    public int getListSize() {
-        return list.size();
-    }
-
     public long findRange(long num){
         int range = 2;
         while (true){
@@ -73,7 +69,6 @@ public class EncodingError {
         Long min = subList.stream().min( Long::compareTo ).orElseThrow();
 
         final Long max = subList.stream().max( Long::compareTo ).orElseThrow();
-        long sum = min+max;
-        return sum;
+        return min+max;
     }
 }
