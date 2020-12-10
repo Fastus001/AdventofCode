@@ -8,7 +8,7 @@ import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.toList;
 
 public class DataConverter {
-    private static final Pattern BOT = Pattern.compile( "(\\d)" );
+    private static final Pattern BOT = Pattern.compile( "(\\d+)" );
     private Bot[] botList =  new Bot[209];
 
     public void createBot(String line){
