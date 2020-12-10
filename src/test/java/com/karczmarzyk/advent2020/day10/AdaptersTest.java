@@ -11,7 +11,7 @@ class AdaptersTest {
     @BeforeEach
     void setUp() {
         Adapters.getInput("src/main/resources/2020/day10/test2.txt");
-        adapters = new Adapters();
+        adapters = new Adapters(49);
     }
 
     @Test

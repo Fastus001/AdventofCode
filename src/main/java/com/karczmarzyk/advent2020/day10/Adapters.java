@@ -7,24 +7,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Adapters {
-    private static final int JOLT_MAX = 172;
+    private final int joltMax;
     private static final List<Integer> list = new ArrayList<>();
     private long counter = 0;
 
-    public Adapters() {
+    public Adapters(int joltMax) {
+        this.joltMax = joltMax;
         list.sort( Integer::compareTo );
     }
 
 
    public void generateLists(int lst){
        List<Integer> lists =  new ArrayList<>();
-            if(lst==JOLT_MAX){
+            if(lst== joltMax ){
                 counter++;
                 return;
             }
             for(Integer i:list){
-                if(i-lst>0 && i-lst<4)
-                {
+                if(i-lst>0 && i-lst<4)                {
                     lists.add( i );
                 }
             }
