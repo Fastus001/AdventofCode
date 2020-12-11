@@ -83,4 +83,12 @@ public class Seats {
         }
         return count;
     }
+
+    public char[][] getGrid() {
+        return grid;
+    }
+
+    public int getSIZE() {
+        return SIZE;
+    }
 }

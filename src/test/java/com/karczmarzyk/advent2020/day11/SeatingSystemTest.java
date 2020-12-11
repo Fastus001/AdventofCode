@@ -28,4 +28,13 @@ class SeatingSystemTest {
         system = new SeatingSystem( seats );
         assertEquals( 2346,system.transformGrid());
     }
+
+    @Test
+    void testPartTwoLastTestCase()
+    {
+        SeatsAdv seats = new SeatsAdv( 10 );
+        seats.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/test.txt" ) );
+        system = new SeatingSystem( seats );
+        system.transformGrid();
+    }
 }
