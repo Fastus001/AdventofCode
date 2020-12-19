@@ -26,74 +26,81 @@ public class SeatsAdv extends Seats{
     }
 
     @Override
-    public int getNumberOfOccupiedSeats(int row, int col) {
-        return checkDiagonal( row,col )+checkRow( row )+checkColumn( col );
+    public int checkSeat(int row, int col) {
+        if(row <0 || row>=super.SIZE || col<0 || col >=super.SIZE){
+            return 0;
+        }
+        if(super.getCharAt(row,col) == '#'){
+            return 1;
+        }else if(super.getCharAt(row,col) == 'L'){
+            return 2;
+        }else{
+            return 0;
+        }
     }
 
+    @Override
+    public int getNumberOfOccupiedSeats(int row, int col) {
+        return checkDiagonal( row,col )+checkRow( row,col )+checkColumn( col,row );
+    }
+
+    //todo - jak ktos widzi puste miejsce to zero
     public int checkDiagonal(int row, int col){
         int result = 0;
 
-        //1 w dó³
-        for (int i = col+1,x=1; i < super.getSIZE(); i++,x++) {
-            if(checkSeat( row+x,i )==1){
+        for (int i = 1; i < super.getSIZE(); i++) {
+            int cellSign = checkSeat(row + i, col + i);
+            if(cellSign ==1){
+                cellSign++;
+                break;
+            }else if(cellSign ==2){
+                break;
+            }
+        }
+        for (int i = 1; i < super.getSIZE(); i++) {
+            if(checkSeat( row-i,col+i )==1){
                 result++;
                 break;
             }
         }
-        for (int i = col+1,x=1; i < super.getSIZE(); i++,x++) {
-            if(checkSeat( row-x,i )==1){
+        for (int i = 1; i < super.getSIZE(); i++) {
+            if(checkSeat( row+i,col-i )==1){
                 result++;
                 break;
             }
         }
-        //TODO
-//        for (int i = col,x=1; i > 0; i--) {
-//            if(checkSeat( row+x,col-x )==1){
-//                result++;
-//                break;
-//            }
-//        }
-//        for (int i = col,x=1; i > 0; i--) {
-//            if(checkSeat( row-x,col-x )==1){
-//                result++;
-//                break;
-//            }
-//        }
-
-
-//
-//        for (int i = col, x=0, y=0; i < super.getSIZE(); i++,x++, y++) {
-//            result += checkSeat( row+x,i );
-//            result += checkSeat( row-x,i );
-//            result += checkSeat( row+x,col-y );
-//            result += checkSeat( row-x,col-y );
-//        }
-        return Math.min( result, 4 );
+        for (int i = 1; i < super.getSIZE(); i++) {
+            if(checkSeat( row-i,col-i )==1){
+                result++;
+                break;
+            }
+        }
+        return result;
     }
 
-
-    public int checkRow(int row){
+//todo
+    public int checkRow(int row, int col){
         int result = 0;
         for (int i = 0; i < super.getSIZE(); i++) {
             if(super.getGrid()[row][i] == '#'){
                 result++;
             }
         }
-        if(row == 0 || row == super.getSIZE()-1){
+        if(col == 0 || col == super.getSIZE()-1){
             return Math.min( result, 1 );
         }else {
             return Math.min( result, 2 );
         }
     }
-
-    public int checkColumn(int col){
+//todo
+    public int checkColumn(int col, int row){
         int result = 0;
         for (int i = 0; i < super.getSIZE(); i++) {
             if(super.getGrid()[i][col] == '#'){
                 result++;
             }
         }
-        if(col == 0 || col == super.getSIZE()-1){
+        if(row == 0 || row == super.getSIZE()-1){
             return Math.min( result, 1 );
         }else {
             return Math.min( result, 2 );

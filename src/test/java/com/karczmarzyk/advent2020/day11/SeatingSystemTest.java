@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SeatingSystemTest {
     SeatingSystem system;
+    PartTwo partTwo;
 
     @BeforeEach
     void setUp() {
@@ -34,7 +35,7 @@ class SeatingSystemTest {
     {
         SeatsAdv seats = new SeatsAdv( 10 );
         seats.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/test.txt" ) );
-        system = new SeatingSystem( seats );
-        system.transformGrid();
+        partTwo = new PartTwo( seats );
+        assertEquals(26,system.transformGrid());
     }
 }

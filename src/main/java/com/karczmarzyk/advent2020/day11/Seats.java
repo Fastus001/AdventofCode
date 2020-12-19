@@ -3,7 +3,7 @@ package com.karczmarzyk.advent2020.day11;
 import java.util.List;
 
 public class Seats {
-    private final int SIZE;
+    public final int SIZE;
     private char[][] grid;
 
     public Seats(int size) {
@@ -86,6 +86,10 @@ public class Seats {
 
     public char[][] getGrid() {
         return grid;
+    }
+
+    public char getCharAt(int row, int col){
+        return grid[row][col];
     }
 
     public int getSIZE() {
