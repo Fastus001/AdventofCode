@@ -8,7 +8,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Ship ship = new Ship();
+        //part1
+//        Ship ship = new Ship();
+        ShipAdv ship = new ShipAdv();
         List<String> strings = new ArrayList<>();
         try {
            strings = Files.readAllLines(Path.of("src/main/resources/2020/day12/day12.txt"));
