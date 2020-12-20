@@ -9,7 +9,6 @@ public class PartTwo {
 
     public int transformGrid(){
         int count = seatsAdv.getOccupiedSeats();
-        seatsAdv.show();
         System.out.println();
         seatsAdv.setGrid( seatsAdv.getNewGrid() );
         int newNumber = seatsAdv.getOccupiedSeats();

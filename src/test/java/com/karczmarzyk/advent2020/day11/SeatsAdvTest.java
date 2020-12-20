@@ -21,12 +21,16 @@ class SeatsAdvTest {
 
     @Test
     void checkRow() {
-        assertEquals( 2,adv.checkRow( 4,4));
+        adv.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/testHard.txt"));
+        assertEquals( 1,adv.checkRow( 1,1));
     }
 
     @Test
     void checkColumn() {
-        assertEquals( 2,adv.checkColumn( 3,2));
+        adv.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/testHard.txt"));
+        assertEquals( 2,adv.checkColumn( 2,0));
+        assertEquals( 0,adv.checkColumn( 2,2));
+        assertEquals( 1,adv.checkColumn( 1,6));
     }
 
     @Test
@@ -39,7 +43,8 @@ class SeatsAdvTest {
     void checkDiagonalHard(){
         adv.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/testHard.txt"));
         adv.show();
-        assertEquals( 1,adv.checkDiagonal(7,0));
+        assertEquals( 0,adv.checkDiagonal(2,2));
+        assertEquals( 1,adv.checkDiagonal(1,8));
     }
 
     @Test

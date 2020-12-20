@@ -20,4 +20,13 @@ class PartTwoTest {
         assertEquals( 26,partTwo.transformGrid());
 
     }
+
+    @Test
+    void testTaskPartTwo()
+    {
+        SeatsAdv seats = new SeatsAdv( 100 );
+        seats.populateGrid( InputStringLines.getInput( "src/main/resources/2020/day11/day11.txt" ) );
+        partTwo = new PartTwo( seats );
+        assertEquals( 2111,partTwo.transformGrid());
+    }
 }
