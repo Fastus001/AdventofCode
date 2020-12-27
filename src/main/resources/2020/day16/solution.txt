@@ -1,0 +1,19 @@
+column 1 zone: 49-790 or 816-953
+column 2 departure time: 30-302 or 315-952
+column 3 departure platform: 27-554 or 570-961
+
+column 4 train: 40-195 or 217-961
+
+column 6 departure track: 40-604 or 618-958
+column 7 - arrival station: 48-733 or 755-969
+
+
+column 9 price: 28-684 or 705-956
+column 11 route: 30-157 or 176-950
+column 13 row: 47-881 or 903-970
+column 14 departure location: 27-374 or 395-974
+
+column 16 departure date: 43-842 or 850-972
+column 20 departure station: 40-287 or 295-953
+
+79,61,67,113,127,137 - 634796407951 - answer to the part two!!!

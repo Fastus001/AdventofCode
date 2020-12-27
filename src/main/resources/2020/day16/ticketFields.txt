@@ -1,0 +1,8 @@
+arrival location: 32-478 or 496-950
+arrival platform: 37-260 or 276-954
+arrival track: 40-512 or 519-964
+class: 34-277 or 284-966
+duration: 25-648 or 672-961
+seat: 38-705 or 727-959
+type: 28-858 or 879-958
+wagon: 31-543 or 554-967
