@@ -22,30 +22,11 @@ class SimulationTest {
     }
 
     @Test
-    void initCube()  {
-
-        simulation.show(Simulation.SIZE/2-1);
-    }
-
-    @Test
-    void checkCell() {
-        simulation.findCellAndSetActive(0,9,0);
-        assertEquals(1,simulation.checkCell(0,9,0));
-        assertEquals(0,simulation.checkCell(0,10,0));
-    }
-
-    @Test
     void getCubes() {
         for (int i = 0; i < 6; i++) {
             simulation.setCubes(simulation.getCubes());
         }
-        assertEquals(112,simulation.getNumberOfActiveCells());
-    }
-
-    @Test
-    void checkNeighbors() {
-        simulation.show(4);
-        simulation.checkNeighbors(4,4,4,new boolean[10][10][10]);
+        assertEquals(848,simulation.getNumberOfActiveCells());
     }
 
     @Test
@@ -57,6 +38,6 @@ class SimulationTest {
         for (int i = 0; i < 6; i++) {
             test.setCubes(test.getCubes());
         }
-        assertEquals(353,test.getNumberOfActiveCells());
+        assertEquals(2472,test.getNumberOfActiveCells());
     }
 }
