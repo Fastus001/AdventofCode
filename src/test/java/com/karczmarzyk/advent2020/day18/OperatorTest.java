@@ -15,6 +15,13 @@ class OperatorTest {
     @Test
     void getParentheses() {
         long parentheses = Operator.getParentheses("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2");
-        assertEquals(13632,parentheses);
+        assertEquals(23340,parentheses);
+    }
+
+
+    @Test
+    void evaluateExpressionAdv() {
+        long parentheses = Operator.getParentheses("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))");
+        assertEquals(669060,parentheses);
     }
 }

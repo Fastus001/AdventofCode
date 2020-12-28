@@ -5,7 +5,7 @@ public class Operator {
 
     public static long getParentheses(String in) {
         if(!in.contains("(")){
-            return evaluateExpression(in);
+            return evaluateExpressionAdv(in);
         }else{
             int start = 0;
             int end = 0;
@@ -19,16 +19,18 @@ public class Operator {
                 }
             }
             var sb = new StringBuilder();
-            sb.append(in, 0, start);
-            sb.append(evaluateExpression(in.substring(start + 1, end)));
-            sb.append(in.substring(end+1));
-            String temp = sb.toString();
-            return getParentheses(temp);
+            sb.append(in, 0, start)
+              .append(evaluateExpressionAdv(in.substring(start + 1, end)))
+              .append(in.substring(end+1));
+            return getParentheses(sb.toString());
         }
     }
 
     //without parentheses
     public static long evaluateExpression(String in) {
+        if(in.length()==1){
+            return Long.parseLong(in);
+        }
         String[] s = in.split(" ");
         long start = Long.parseLong(s[0]);
         for (int i = 1; i < s.length; i += 2) {
@@ -39,6 +41,19 @@ public class Operator {
             }
         }
         return start;
+    }
+
+    public static long evaluateExpressionAdv(String in) {
+        if(in.contains("+")){
+            String[] s = in.split(" \\* ");
+            long sum = 1;
+            for (int i = 0; i < s.length; i ++) {
+                sum*=evaluateExpression(s[i]);
+            }
+            return sum;
+        }else{
+            return evaluateExpression(in);
+        }
     }
 
     private static long evaluateAdding(long a, long b) {
