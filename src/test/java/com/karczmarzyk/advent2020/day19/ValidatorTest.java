@@ -25,7 +25,13 @@ class ValidatorTest {
 
 
     @Test
-    void getRule() {
+    void testPartOne() {
         assertEquals( 109,validator.checkMessagesPartOne());
+    }
+
+    @Test
+    void testPartTwo() throws IOException {
+        Validator valid = new Validator("src/main/resources/2020/day19/rulePartTwo.txt");
+        assertEquals( 301,valid.checkMessagesPartTwo());
     }
 }

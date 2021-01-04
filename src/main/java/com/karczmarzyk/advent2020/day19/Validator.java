@@ -38,11 +38,17 @@ public class Validator {
         //42 31
         String rule11 = this.getRule( 11 ).getRule();
 
-        Pattern pattern = Pattern.compile( rule8+rule11 );
+        return getNumberOfMatches( Pattern.compile( rule8+rule11 ) );
+    }
 
-        int counter = getNumberOfMatches( pattern );
-        System.out.println( "count = " + counter );
-        return counter;
+    public int checkMessagesPartTwo(){
+        String rule42 = this.getRule( 42 ).getRule();
+
+        String rule31 = this.getRule( 31 ).getRule();
+
+        String end = "^((42+)((42 31) | (42{2} 31{2}) | (42{3} 31{3}) | (42{4} 31{4}) | (42{4} 31{4})))$";
+        end = end.replace( "42", rule42 ).replace( "31", rule31 ).replace( " ","" );
+        return getNumberOfMatches( Pattern.compile( end ) );
     }
 
     private int getNumberOfMatches(Pattern pattern) {
