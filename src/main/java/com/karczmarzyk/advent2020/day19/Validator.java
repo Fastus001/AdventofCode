@@ -3,53 +3,60 @@ package com.karczmarzyk.advent2020.day19;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
+
 public class Validator {
-    private Map<String, Rule> ruleMap = new TreeMap<>();
+    private final Map<Integer, Rule> ruleMap = new HashMap<>();
+    private final List<String> messages;
 
     public Validator(String path) throws IOException {
         List<String> strings = Files.readAllLines(Path.of(path));
-        List<String[]> collect = strings.stream()
+
+        List<String[]> rules = strings.stream()
+                .filter( s -> s.contains( ":" ) )
                 .map(s -> s.split(":"))
                 .collect(Collectors.toList());
-        collect.forEach(strings1 -> ruleMap.put(strings1[0],new Rule(strings1[1])));
+
+        rules.forEach(strings1 -> ruleMap
+                .put( parseInt( strings1[0]), new Rule( strings1[1],this)));
+
+        messages = strings.stream()
+                .filter( s -> !s.contains( ":" ) && s.length()!=0 )
+                .collect( Collectors.toList());
     }
 
-    public void checkMap(){
-        for(Map.Entry<String,Rule> entry:ruleMap.entrySet()){
-            Rule rule = entry.getValue();
-            String key = entry.getKey();
-            if(!rule.isOnlyLetters()){
-                List<Integer> temp = rule.getNumber();
-                temp = temp.stream()
-                        .filter(integer -> integer>0)
-                        .collect(Collectors.toList());
-                if(temp.size()>0 ){
-                    for(Integer in:temp) {
-                        Rule rule1 = ruleMap.get(Integer.toString(in));
-                        String num = "";
-                        if(in>99){
-                            num = Integer.toString(in);
-                        }else{
-                            num = " "+in+" ";
-                        }
-                        if(rule1.isOnlyLetters()){
-//                    System.out.println("rule1 = " + rule1 + " " +num);
-                            rule.addNewRules(rule1.getRulesFinalRules(),
-                                    num);
-//                            System.out.println("rule = " + rule + " key " + key);
-                        }
-                    }
-                }
+    public int checkMessagesPartOne(){
+        //42
+        String rule8 = this.getRule( 8 ).getRule();
+        //42 31
+        String rule11 = this.getRule( 11 ).getRule();
+
+        Pattern pattern = Pattern.compile( rule8+rule11 );
+
+        int counter = getNumberOfMatches( pattern );
+        System.out.println( "count = " + counter );
+        return counter;
+    }
+
+    private int getNumberOfMatches(Pattern pattern) {
+        int counter = 0;
+        for(String s:messages){
+            Matcher matcher = pattern.matcher( s);
+            if(matcher.matches()){
+                counter++;
             }
         }
+        return counter;
     }
 
-    public Rule getRule(String key) {
+    public Rule getRule(Integer key) {
         return ruleMap.get(key);
     }
 
@@ -57,7 +64,7 @@ public class Validator {
         return ruleMap.size();
     }
 
-    public Map<String, Rule> getRuleMap() {
-        return ruleMap;
+    public List<String> getMessages() {
+        return messages;
     }
 }
