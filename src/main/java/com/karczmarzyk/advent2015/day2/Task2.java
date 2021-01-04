@@ -1,8 +1,10 @@
-package com.karczmarzyk.advent2015;
+package com.karczmarzyk.advent2015.day2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Task2 {

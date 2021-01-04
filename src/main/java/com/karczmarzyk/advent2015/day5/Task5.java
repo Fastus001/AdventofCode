@@ -1,4 +1,4 @@
-package com.karczmarzyk.advent2015;
+package com.karczmarzyk.advent2015.day5;
 
 import java.io.File;
 import java.io.FileNotFoundException;

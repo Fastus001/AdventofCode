@@ -1,4 +1,4 @@
-package com.karczmarzyk.advent2015;
+package com.karczmarzyk.advent2015.day6;
 
 
 import java.io.File;

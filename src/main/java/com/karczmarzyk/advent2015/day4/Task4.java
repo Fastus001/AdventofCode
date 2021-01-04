@@ -1,4 +1,4 @@
-package com.karczmarzyk.advent2015;
+package com.karczmarzyk.advent2015.day4;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
