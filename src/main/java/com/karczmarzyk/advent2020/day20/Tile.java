@@ -1,5 +1,6 @@
 package com.karczmarzyk.advent2020.day20;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tile {
@@ -15,21 +16,33 @@ public class Tile {
             }
         }
     }
+    public List<String> getAllSides(){
+        List<String> temp = new ArrayList<>();
+        temp.add( getRow( 0, false ) );
+        temp.add( getRow( 9 ,false) );
+        temp.add( getColumn( 0,false ) );
+        temp.add( getColumn( 9,false ) );
+        temp.add( getRow( 0, true ) );
+        temp.add( getRow( 9 ,true) );
+        temp.add( getColumn( 0,true ) );
+        temp.add( getColumn( 9,true ) );
+        return temp;
+    }
 
-    public String getColumn(int col){
+    public String getColumn(int col, boolean reversed){
         var sb = new StringBuilder();
         for (int i = 0; i < SIZE; i++) {
             sb.append( box[i][col]);
         }
-        return sb.toString();
+        return reversed?sb.reverse().toString():sb.toString();
     }
 
-    public String getRow(int row){
+    public String getRow(int row, boolean reversed){
         var sb = new StringBuilder();
         for (int i = 0; i < SIZE; i++) {
             sb.append( box[row][i]);
         }
-        return sb.toString();
+        return reversed?sb.reverse().toString():sb.toString();
     }
 
     public void flipHorizontally(){
@@ -56,9 +69,9 @@ public class Tile {
 
     public void showTile(){
         System.out.println( idNumber );
-        for (int i = 0; i < box.length; i++) {
+        for (char[] chars : box) {
             for (int j = 0; j < box.length; j++) {
-                System.out.print( box[i][j] );
+                System.out.print( chars[j] );
             }
             System.out.println();
         }
