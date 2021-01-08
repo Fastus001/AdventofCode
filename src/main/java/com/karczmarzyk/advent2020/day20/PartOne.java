@@ -25,10 +25,17 @@ public class PartOne {
                 }
             }
         }
-        List<String> collect = imageTiles.stream()
+        List<Integer> collect = imageTiles.stream()
                 .filter( iT -> iT.getNumber() == 4 )
-                .map( iT -> iT.getTile().getIdNumber() )
+                .mapToInt( iT -> iT.getTile().getIdNumber() )
+                .boxed()
                 .collect( Collectors.toList() );
+
+        long count = imageTiles.stream()
+                .filter( iT -> iT.getNumber() == 8 )
+                .count();
+
+        System.out.println( "count = " + count );
 
         System.out.println( "collect = " + collect );
     }

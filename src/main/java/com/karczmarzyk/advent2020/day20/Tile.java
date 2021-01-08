@@ -2,20 +2,44 @@ package com.karczmarzyk.advent2020.day20;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 
 public class Tile {
+    public static final Pattern NUM = Pattern.compile( "(\\d+)" );
     public static final int SIZE = 10;
-    private String idNumber;
+    private int idNumber = 0;
     private char[][] box = new char[SIZE][SIZE];
 
     public Tile(List<String> idNumber) {
-        this.idNumber = idNumber.get( 0 );
+        String s = NUM.matcher( idNumber.get( 0 ) )
+                .results()
+                .map( MatchResult::group )
+                .findFirst()
+                .orElseThrow();
+//
+        this.idNumber = Integer.parseInt( s);
         for (int i = 0; i < box.length; i++) {
             for (int j = 0; j < box.length; j++) {
                 box[i][j] = idNumber.get( i+1 ).charAt( j );
             }
         }
     }
+
+
+    public void rotateLeft(){
+        List<String> temp = new ArrayList<>();
+        for (int i = SIZE-1; i >= 0; i--) {
+            temp.add( getColumn( i ,false) );
+        }
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                box[i][j] = temp.get( i ).charAt( j );
+            }
+        }
+
+    }
+
     public List<String> getAllSides(){
         List<String> temp = new ArrayList<>();
         temp.add( getRow( 0, false ) );
@@ -63,7 +87,7 @@ public class Tile {
         box = temp;
     }
 
-    public String getIdNumber() {
+    public int getIdNumber() {
         return idNumber;
     }
 

@@ -62,4 +62,10 @@ public class JigSaw {
     public List<Tile> getTiles() {
         return tiles;
     }
+
+    public List<ImageTile> getImageTiles() {
+        return tiles.stream()
+                .map( ImageTile::new )
+                .collect( Collectors.toList());
+    }
 }

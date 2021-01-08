@@ -41,4 +41,11 @@ class TileTest {
         List<String> allSides = tile.getAllSides();
         System.out.println( "allSides = " + allSides );
     }
+
+    @Test
+    void rotate() {
+        tile.showTile();
+        tile.rotateLeft();
+        tile.showTile();
+    }
 }
