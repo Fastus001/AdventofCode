@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -11,23 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ImageTest {
     Image image;
-    List<ImageTile> adjacentTiles;
 
     @BeforeEach
     void setUp() throws IOException {
         JigSaw jigSaw = new JigSaw( "src/main/resources/2020/day20/input.txt" );
         image = new Image( jigSaw.getImageTiles() );
     }
-
-
-
-    @Test
-    void getImageById() {
-        List<ImageTile> adjacentTiles = image.findAdjacentTiles( image.getImageById( 2309 ) );
-
-        System.out.println( "adjacentTiles.size() = " + adjacentTiles );
-    }
-
 
     @Test
     void findAdjacentTiles() {
@@ -38,11 +28,18 @@ class ImageTest {
         assertAll(()->assertEquals( 0,xy.getRow() ),
                   ()->assertEquals( 0,xy.getCol() ));
 
-        System.out.println( "this = " + image.getImageById( num ) );
-        System.out.println( "up = " + image.getImageById( num ).getUp() );
-        System.out.println( "down = " + image.getImageById( num ).getDown() );
-        System.out.println( "left = " + image.getImageById( num ).getLeft() );
-        System.out.println( "right = " + image.getImageById( num ).getRight() );
-        System.out.println( "Pair = " + image.getImageById( num ).getXy() );
+        image.getImageById( num ).getTile().showTile();
+    }
+
+    @Test
+    void getOneImageLineWithoutBorderAndGaps() {
+        image.sortTiles();
+        List<String> list = new ArrayList<>();
+        list.add( "tile:00001" );
+        for (int i = 0; i < 12; i++) {
+            list.addAll( image.getOneImageLineWithoutBorderAndGaps(i));
+        }
+
+        assertEquals( "..#.#...",list.get( 1 ).substring( 0,8 ) );
     }
 }

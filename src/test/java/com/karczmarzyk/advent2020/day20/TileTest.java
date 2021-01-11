@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,18 +33,5 @@ class TileTest {
     @Test
     void getColumn() {
         assertEquals( ".#####..#.", tile.getColumn(0,false));
-    }
-
-    @Test
-    void getAllSides() {
-        List<String> allSides = tile.getAllSides();
-        System.out.println( "allSides = " + allSides );
-    }
-
-    @Test
-    void rotate() {
-        tile.showTile();
-        tile.rotateLeft();
-        tile.showTile();
     }
 }

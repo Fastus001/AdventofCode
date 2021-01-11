@@ -3,43 +3,56 @@ package com.karczmarzyk.advent2020.day20;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PartTwo {
-    private static Image image;
+    public static final Pattern LINE_ONE = Pattern.compile( ".{18}#." );
+    public static final Pattern LINE_TWO = Pattern.compile( "#.{4}##.{4}##.{4}###" );
+    public static final Pattern LINE_THREE = Pattern.compile( ".#..#..#..#..#..#.{3}" );
 
     public static void main(String[] args) throws IOException {
         JigSaw jigSaw = new JigSaw( "src/main/resources/2020/day20/input.txt" );
-        image = new Image( jigSaw.getImageTiles() );
+        Image image = new Image( jigSaw.getImageTiles() );
+        image.sortTiles();
 
-        List<ImageTile> adjacentTiles = image.findAdjacentTiles( image.getImageById( 2221 ) );
-
-        List<ImageTile> imageTiles = adjacentTileList( adjacentTiles );
-
-        while (imageTiles.size()>0){
-            imageTiles = adjacentTileList( imageTiles );
+        List<String> list = new ArrayList<>();
+        list.add( "tile:00001" );
+        for (int i = 0; i < 12; i++) {
+            list.addAll( image.getOneImageLineWithoutBorderAndGaps( i));
         }
+        Tile big = new Tile( list );
+        big.rotateLeft();
 
 
-        int num = 3011;
-        System.out.println( "this = " + image.getImageById( num ) );
-        System.out.println( "up = " + image.getImageById( num ).getUp() );
-        System.out.println( "down = " + image.getImageById( num ).getDown() );
-        System.out.println( "left = " + image.getImageById( num ).getLeft() );
-        System.out.println( "right = " + image.getImageById( num ).getRight() );
-        System.out.println( "Pair = " + image.getImageById( num ).getXy() );
-        long count = image.getImage().stream().filter( i -> !i.isLock() ).count();
-        System.out.println( "count = " + count );
+        int counter = matchMonster( big.getAllRows() );
+        int finalResult = big.getHashTileNumber()-(counter*15);
+        System.out.println( "finalResult = " + finalResult );
 
     }
 
-    public static List<ImageTile> adjacentTileList(List<ImageTile> input){
-        List<ImageTile> temp = new ArrayList<>();
-        for(ImageTile it:input){
-            temp.addAll( image.findAdjacentTiles( it ) );
+    private static int matchMonster(List<String> allRows) {
+        int counter = 0;
+        for (int row = 0; row < allRows.size(); row++) {
+            Matcher two = LINE_TWO.matcher( allRows.get( row ) );
+            while (two.find()){
+                int twoStart = two.start();
+                Matcher three = LINE_THREE.matcher( allRows.get( row+1 ).substring( twoStart ) );
+                while (three.find()) {
+                    int threeStart = three.start();
+                    if(threeStart==0){
+                        Matcher one = LINE_ONE.matcher( allRows.get( row-1 ).substring( twoStart ) );
+                        while (one.find()){
+                            int oneStart = one.start();
+                            if(oneStart==0){
+                                counter++;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        return temp;
+        return counter;
     }
-
-
-
 }
+

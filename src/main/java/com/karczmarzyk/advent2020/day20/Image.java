@@ -5,15 +5,35 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Image {
-    public static final int SIZE = 12;
     private static List<ImageTile> image;
 
     public Image(List<ImageTile> image) {
-        this.image = image;
+        Image.image = image;
 
         ImageTile initImageTile = getImageById( 2221 );
         initImageTile.setLock( true );
         initImageTile.setXy( new Pair( 11, 11) );
+    }
+
+    public List<String> getOneImageLineWithoutBorderAndGaps(int row){
+        List<ImageTile> line = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            line.add( getImageByXY( row, i ));
+        }
+        List<List<String>> rowsWithoutBorders = line.stream()
+                .map( iT -> iT.getTile().getAllRowsWithoutBorders() )
+                .collect( Collectors.toList() );
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            var sb = new StringBuilder();
+            for (int j = 0; j < 12; j++) {
+              sb.append( rowsWithoutBorders.get( j ).get( i ) );
+            }
+            result.add( sb.toString() );
+        }
+        return result;
+
     }
 
     public void sortTiles(){
@@ -44,13 +64,15 @@ public class Image {
         return temp;
     }
 
-    public List<ImageTile> getImage() {
-        return image;
-    }
-
     public ImageTile getImageById(int id){
         return image.stream()
                 .filter( i -> i.getTile().getIdNumber() == id )
+                .findFirst()
+                .orElseThrow();
+    }
+    public ImageTile getImageByXY(int row, int col){
+        return image.stream()
+                .filter( i -> i.getXy().getRow()==row && i.getXy().getCol()==col )
                 .findFirst()
                 .orElseThrow();
     }

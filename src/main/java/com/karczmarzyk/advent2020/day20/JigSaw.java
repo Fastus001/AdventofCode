@@ -27,7 +27,6 @@ public class JigSaw {
         }
     }
 
-
     private void addStringsToTestList(List<String> temp) {
         String x = temp.get( 1 );
         test.add( x );
@@ -68,4 +67,6 @@ public class JigSaw {
                 .map( ImageTile::new )
                 .collect( Collectors.toList());
     }
+
+
 }
