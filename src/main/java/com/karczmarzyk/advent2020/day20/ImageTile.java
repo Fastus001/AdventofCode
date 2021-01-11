@@ -1,5 +1,9 @@
 package com.karczmarzyk.advent2020.day20;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 public class ImageTile {
@@ -10,6 +14,7 @@ public class ImageTile {
     private ImageTile left = null;
     private ImageTile right = null;
     private boolean lock = false;
+    private Pair xy = null;
 
     public ImageTile(Tile tile) {
         this.tile = tile;
@@ -95,18 +100,19 @@ public class ImageTile {
         }
         if ( num == 9 ) {
             if ( this.tile.getColumn( num, false ).equals( row ) ) {
-//                System.out.println( "num = " + num );
-                this.right = tile;
-                tile.left = this;
+//                this.right = tile;
+//                tile.left = this;
                 this.lock = true;
+                if(this.xy==null){
+                    this.setXy( new Pair( tile.getXy().getRow(), tile.getXy().getCol()-1 ));
+                }
                 return true;
             }
         }
         else {
             if ( this.tile.getColumn( num, false ).equals( row ) ) {
-//                System.out.println( "num = " + num );
-                this.left = tile;
-                tile.right = this;
+//                this.left = tile;
+//                tile.right = this;
                 this.lock = true;
                 return true;
             }
@@ -114,10 +120,9 @@ public class ImageTile {
         return false;
     }
 
-    private boolean attachToRow(ImageTile tile, String row, boolean upRow) {
+    private void attachToRow(ImageTile tile, String row, boolean upRow) {
         if ( this.lock ) {
             if ( checkRow( tile, row, upRow ) ) {
-                return true;
             }
             else {
                 System.out.println( "Error tile image Locked!!!" );
@@ -125,18 +130,17 @@ public class ImageTile {
         }
         else {
             if ( checkRow( tile, row, upRow ) ) {
-                return true;
             }
             else {
                 for (int i = 0; i < 4; i++) {
                     this.getTile().rotateLeft();
                     if ( checkRow( tile, row, upRow ) ) {
-                        return true;
+                        return;
                     }
                     else {
                         this.getTile().flipHorizontally();
                         if ( checkRow( tile, row, upRow ) ) {
-                            return true;
+                            return;
                         }
                         else {
                             this.getTile().flipHorizontally();
@@ -145,7 +149,6 @@ public class ImageTile {
                 }
             }
         }
-        return false;
     }
 
     private boolean checkRow(ImageTile tile, String row, boolean upRow) {
@@ -156,17 +159,20 @@ public class ImageTile {
         if ( num == 9 ) {
             if ( this.tile.getRow( num, false ).equals( row ) ) {
 //                System.out.println( "num = " + num );
-                this.down = tile;
-                tile.up = this;
+//                this.down = tile;
+//                tile.up = this;
                 this.lock = true;
+                if(this.xy==null){
+                    this.setXy( new Pair( tile.getXy().getRow()-1, tile.getXy().getCol() ));
+                }
                 return true;
             }
         }
         else {
             if ( this.tile.getRow( num, false ).equals( row ) ) {
 //                System.out.println( "num = " + num );
-                this.up = tile;
-                tile.down = this;
+//                this.up = tile;
+//                tile.down = this;
                 this.lock = true;
                 return true;
             }
@@ -211,9 +217,26 @@ public class ImageTile {
         return right;
     }
 
+    public Pair getXy() {
+        return xy;
+    }
+
+    public void setXy(Pair xy) {
+        this.xy = xy;
+    }
+
     @Override
     public String toString() {
         return "imgTile{" +
                 "no.=" + number;
     }
+}
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+class Pair{
+    private int row;
+    private int col;
+
 }

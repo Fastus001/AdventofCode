@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ImageTest {
     Image image;
     List<ImageTile> adjacentTiles;
@@ -28,24 +31,18 @@ class ImageTest {
 
     @Test
     void findAdjacentTiles() {
-        int num = 1847;
-        List<ImageTile> adjacentTiles = image.findAdjacentTiles( image.getImageById( 2221 ) );
-//        image.getImageById( 2221 ).joinTiles( image.getImageById( adjacentTiles.get( 1 ).getNumber() ));
-//        image.findAdjacentTiles( image.getImageById( 2309 ) );
-//        image.findAdjacentTiles( image.getImageById( 3191 ) );
-//        image.findAdjacentTiles( image.getImageById( 1669 ) );
-//        image.findAdjacentTiles( image.getImageById( 2399 ) );
-//        image.findAdjacentTiles( image.getImageById( 3461 ) );
-//        image.findAdjacentTiles( image.getImageById( 2137 ) );
-//        image.findAdjacentTiles( image.getImageById( 2113 ) );
-//        image.findAdjacentTiles( image.getImageById( 1567 ) );
-//        image.findAdjacentTiles( image.getImageById( 1163 ) );
-//        image.findAdjacentTiles( image.getImageById( 1123 ) );
-//        image.findAdjacentTiles( image.getImageById( 1847 ) );
+        int num = 3011;
+        image.sortTiles();
+        Pair xy = image.getImageById( num ).getXy();
+
+        assertAll(()->assertEquals( 0,xy.getRow() ),
+                  ()->assertEquals( 0,xy.getCol() ));
+
         System.out.println( "this = " + image.getImageById( num ) );
         System.out.println( "up = " + image.getImageById( num ).getUp() );
         System.out.println( "down = " + image.getImageById( num ).getDown() );
         System.out.println( "left = " + image.getImageById( num ).getLeft() );
         System.out.println( "right = " + image.getImageById( num ).getRight() );
+        System.out.println( "Pair = " + image.getImageById( num ).getXy() );
     }
 }
