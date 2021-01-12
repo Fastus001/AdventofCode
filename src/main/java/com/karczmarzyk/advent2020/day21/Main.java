@@ -19,7 +19,7 @@ public class Main {
                 .distinct()
                 .collect( Collectors.toList() );
 
-        result = new HashSet<>();
+        result = new TreeSet<>();
         for (String s : collect) {
             result.addAll( Allergen.getAllergens( s,getRecipeList( strings ) ) );
         }
