@@ -11,9 +11,10 @@ import java.util.Queue;
 
 @Data
 public class Game {
+    private static int gameNo = 0;
     private Queue<Integer> one = new ArrayDeque<>();
     private Queue<Integer> two = new ArrayDeque<>();
-    
+
     public void addPlayerDecks(String path) throws IOException {
         List<String> input = Files.readAllLines( Path.of( path ) );
         boolean one = true;
@@ -37,8 +38,6 @@ public class Game {
         }else if(one.peek()<two.peek()){
             two.add( two.remove() );
             two.add( one.remove() );
-        }else{
-            System.out.println("Equals!!");
         }
     }
     
@@ -56,4 +55,7 @@ public class Game {
         return res;
     }
 
+    public static int getGameNo() {
+        return gameNo;
+    }
 }
