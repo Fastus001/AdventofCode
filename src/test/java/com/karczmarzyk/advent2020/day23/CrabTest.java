@@ -12,7 +12,7 @@ class CrabTest {
 
     @BeforeEach
     void setUp() {
-        crab = new Crab( "389125467" );
+        crab = new Crab( "487912365" );
     }
 
     @Test
@@ -27,8 +27,8 @@ class CrabTest {
 
     @Test
     void round() {
-        for (int i = 0; i < 10; i++) {
-            crab.round();
+        for (int i = 0; i < 100; i++) {
+            crab.round(i);
         }
     }
 }
