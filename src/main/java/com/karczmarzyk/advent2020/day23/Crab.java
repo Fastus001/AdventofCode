@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class Crab {
@@ -18,25 +19,17 @@ public class Crab {
     }
 
     public void round(int round) {
-        show( round );
+
         int currentCup = round % 9;
-        System.out.println( "currentCup = " + currentCup );
         int cupNoCurrent = caps.get( currentCup );
         var pick = pickUp( currentCup );
-        System.out.println( "pickup = " + pick );
         int destIndex = searchDestination( cupNoCurrent - 1 );
-        System.out.println( "destIndex = " + destIndex );
-        System.out.println( "dest no = " + caps.get( destIndex ) );
 
         caps.addAll( destIndex + 1, pick );
 
-
         if ( cupNoCurrent != caps.get( round % 9 ) ) {
-            System.out.println( "Needs to change arrangement!!!!" );
             changeCaps( currentCup, cupNoCurrent );
         }
-
-        System.out.println( "caps = " + caps );
     }
 
     private void changeCaps(int index, int cupNo) {
@@ -46,7 +39,6 @@ public class Crab {
             caps.subList( 0, Math.abs( dif )).clear();
             caps.addAll( integers );
         }
-        System.out.println( "dif = " + dif );
     }
 
     private int searchDestination(int dest) {
@@ -100,5 +92,13 @@ public class Crab {
             System.out.print( " " );
         }
         System.out.println();
+    }
+
+    public String getNumber() {
+        var split = caps.stream()
+                .map( i -> Integer.toString( i ) )
+                .collect( Collectors.joining() )
+                .split( "1" );
+        return split[1]+split[0];
     }
 }

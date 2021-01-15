@@ -26,9 +26,10 @@ class CrabTest {
     }
 
     @Test
-    void round() {
+    void roundPartOne() {
         for (int i = 0; i < 100; i++) {
             crab.round(i);
         }
+        assertEquals( "89573246",crab.getNumber() );
     }
 }
