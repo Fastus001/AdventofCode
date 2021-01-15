@@ -1,5 +1,6 @@
 package com.karczmarzyk.advent2020.day24;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,12 @@ public class Hex {
         for (String s : split) {
             this.addNumber( s );
         }
-        white = false;
+        white = true;
+    }
+
+    public Hex(Pair pair){
+        this.pair = pair;
+        white = true;
     }
 
     public void addNumber(String l){
@@ -37,8 +43,16 @@ public class Hex {
     public void flipColor(){
         white = !white;
     }
-}
 
+    @Override
+    public String toString() {
+        return "Hex{" +
+                "white=" + white +
+                ", pair=" + pair +
+                '}';
+    }
+}
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 class Pair{

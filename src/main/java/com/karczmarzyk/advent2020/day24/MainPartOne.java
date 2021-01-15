@@ -5,11 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MainPartOne {
-    public static final Pattern SPLIT = Pattern.compile( "" );
     private static Map<Pair,Hex> list = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
