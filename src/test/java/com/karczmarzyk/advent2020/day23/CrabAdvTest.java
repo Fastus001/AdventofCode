@@ -3,6 +3,9 @@ package com.karczmarzyk.advent2020.day23;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class CrabAdvTest {
     CrabAdv adv;
 
@@ -12,20 +15,20 @@ class CrabAdvTest {
     }
 
     @Test
-    void show() {
-        adv.show( 0 );
+    void testConstructor() {
+        Cup cup = adv.getCupMap().get( 4 );
+
+        assertAll( () -> assertEquals( 1_000_000, cup.getPrevious().getNumber() ),
+                   () -> assertEquals( 8, cup.getNext().getNumber() ) );
     }
 
+
     @Test
-    void round() {
+    void pickUp() {
         for (int i = 0; i < 10_000_000; i++) {
-            adv.round( i );
-            if(i%1000==0){
-                System.out.println(i);
-                adv.show( i );
-                System.out.println( adv.getTwoAfterOne() );
-            }
+            adv.pickUp();
         }
-        System.out.println( "adv = " + adv.getNumber() );
+
+        assertEquals( 2029056128 ,adv.getFinalNumber());
     }
 }
