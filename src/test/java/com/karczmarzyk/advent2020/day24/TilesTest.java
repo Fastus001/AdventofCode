@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class TilesTest {
     Tiles tiles;
 
@@ -13,13 +15,12 @@ class TilesTest {
         tiles = new Tiles();
     }
 
-    @Test
-    void testConstructor(){
-
-    }
-
-    @Test
+     @Test
     void checkAdjacentTiles() {
-        tiles.transform();
+        for (int i = 1; i < 100; i++) {
+            tiles.transform();
+        }
+
+        assertEquals( 3565, tiles.transform() );
     }
 }
