@@ -10,28 +10,27 @@ class BotTest {
 
     @BeforeEach
     void setUp() {
-        bot = new Bot( 182,60 );
+        bot = new Bot( "bot 2", "bot 1", "bot 0" );
+        bot.addValue( 1 );
+        bot.addValue( 2 );
     }
+
+
+    @Test
+    void testBot() {
+
+    }
+
 
     @Test
     void addValue() {
-        assertAll( ()->assertFalse( bot.addValue( 10 ) ) ,
-                   ()-> assertTrue( bot.addValue(25) ));
+        assertFalse( bot.addValue( 5 ) );
+        assertTrue( bot.addValue( 2 ) );
     }
 
     @Test
-    void testMinValue() {
-        bot.addValue( 1 );
-        bot.addValue( 2 );
-
-        assertEquals( 1,bot.getMinValue() );
-    }
-
-    @Test
-    void testMaxValue() {
-        bot.addValue( 1 );
-        bot.addValue( 2 );
-
-        assertEquals( 2,bot.getMaxValue() );
+    void getValue() {
+        assertAll( () -> assertEquals( 1, bot.getValue( true ) ),
+                   () -> assertEquals( 2, bot.getValue( false ) ) );
     }
 }

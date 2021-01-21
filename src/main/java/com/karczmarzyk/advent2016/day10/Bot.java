@@ -1,40 +1,57 @@
 package com.karczmarzyk.advent2016.day10;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
 
+import java.util.Set;
+import java.util.TreeSet;
+
+@Getter
 public class Bot {
-    private final List<Integer> values= new ArrayList<>();
-    private final int lowOutput;
-    private final int highOutput;
+    private final String  name;
+    private final String low;
+    private final String high;
+    private final Set<Integer> values = new TreeSet<>();
+    private boolean bothValues = false;
 
-    public Bot(int lowOutput, int highOutput) {
-        this.lowOutput = lowOutput;
-        this.highOutput = highOutput;
+    public Bot(String name, String low, String high) {
+        this.name = name;
+        this.low = low;
+        this.high = high;
     }
 
     public boolean addValue(int value){
         values.add( value );
-        return values.size()==2;
+        if(values.size()==2){
+            bothValues=true;
+            return true;
+        }
+        return false;
     }
 
-    public int getMinValue(){
-        return values.stream()
-                .min( Integer::compareTo )
-                .orElseThrow();
+    public int getValue(boolean low){
+        if(low){
+            return values.stream()
+                    .min( Integer::compareTo )
+                    .orElseThrow();
+        }else{
+            return values.stream()
+                    .max( Integer::compareTo )
+                    .orElseThrow();
+        }
     }
 
-    public int getMaxValue(){
-        return values.stream()
-                .max( Integer::compareTo )
-                .orElseThrow();
+    public Set<Integer> getValues() {
+        return values;
     }
 
-    public int getLowOutput() {
-        return lowOutput;
-    }
-
-    public int getHighOutput() {
-        return highOutput;
+    @Override
+    public String toString() {
+        return "Bot{" +
+                "name='" + name + '\'' +
+                ", low='" + low + '\'' +
+                ", high='" + high + '\'' +
+                ", values=" + values +
+                ", bothValues=" + bothValues +
+                '}';
     }
 }
