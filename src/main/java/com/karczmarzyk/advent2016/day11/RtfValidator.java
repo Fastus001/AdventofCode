@@ -7,7 +7,6 @@ import static java.util.stream.Collectors.toList;
 
 public class RtfValidator {
 
-
     public static boolean validateRtf(Rtf rtf){
         boolean test = true;
         List<Chip> mChips = rtf.getMChips();

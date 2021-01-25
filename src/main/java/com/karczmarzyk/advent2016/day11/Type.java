@@ -4,7 +4,7 @@ public enum Type {
     GENERATOR("G"),
     MICROCHIP("M");
 
-    private String name;
+    private final String name;
 
     Type(String name) {
         this.name = name;

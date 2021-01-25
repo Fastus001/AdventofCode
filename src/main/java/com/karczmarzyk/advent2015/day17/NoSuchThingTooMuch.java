@@ -12,10 +12,10 @@ public class NoSuchThingTooMuch {
         NoSuchThingTooMuch ns = new NoSuchThingTooMuch();
         List<int[]> combinations = ns.generate(20, K);
         //PART 1 SOLUTION BELOW
-//        combinations.addAll(ns.generate(20,5));
-//        combinations.addAll(ns.generate(20,6));
-//        combinations.addAll(ns.generate(20,7));
-//        combinations.addAll(ns.generate(20,8));
+//        combinations.addAll(ns.generateCombinations(20,5));
+//        combinations.addAll(ns.generateCombinations(20,6));
+//        combinations.addAll(ns.generateCombinations(20,7));
+//        combinations.addAll(ns.generateCombinations(20,8));
         System.out.printf("generated %d combinations of %d items from %d ", combinations.size(), 20, K);
 
     }

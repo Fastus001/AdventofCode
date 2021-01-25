@@ -5,26 +5,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PartOne {
-    private static List<Rtf> RTFS  = new ArrayList<>();
+    private static List<Rtf> RTF_LIST = new ArrayList<>();
 
     public PartOne(List<Rtf> rtfList) {
-        this.RTFS = rtfList;
+        this.RTF_LIST = rtfList;
     }
 
     public void makeMove(){
         List<Rtf> temp = new ArrayList<>();
-        for (Rtf rtf : RTFS) {
+        for (Rtf rtf : RTF_LIST) {
             temp.addAll( rtf.generatePossibleMoves() );
         }
-        for (Rtf r : temp) {
-//            System.out.println(r.getFloorSum() + " " + r.toString());
-        }
-        int max = temp.stream().mapToInt( Rtf::getFloorSum ).max().orElse( -1 );
-        System.out.println("max: "+ max);
 
-        System.out.println(temp.size());
-        RTFS.clear();
-        RTFS = temp.stream()
+        RTF_LIST.clear();
+        RTF_LIST = temp.stream()
                 .distinct()
                 .filter( RtfValidator::validateRtf )
                 .collect( Collectors.toList());

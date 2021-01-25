@@ -1,4 +1,4 @@
-package com.karczmarzyk.advent2016.day11;
+package com.karczmarzyk.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Generator {
         }
     }
 
-    public static List<int[]> generate(int num)
+    public static List<int[]> generateCombinations(int num)
     {
         NUMBERS = new int[num];
         for (int i = 0; i < num; i++) {

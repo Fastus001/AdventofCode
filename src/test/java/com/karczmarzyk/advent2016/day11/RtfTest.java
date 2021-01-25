@@ -27,20 +27,6 @@ class RtfTest {
         assertEquals( 2,items.size() );
     }
 
-    @Test
-    void executeUpTwoItems() throws CloneNotSupportedException {
-        List<Chip> items = rtf.itemsFromCurrentFloor( rtf.getMChips());
-
-        Rtf execute = rtf.executeNextMove( items, true );
-
-        assertNotNull( execute );
-        assertEquals( 2,execute.getMChips().get( 3 ).getFloor() );
-        assertEquals( 2,execute.getElevator().getFloor() );
-        assertEquals( 1,execute.getMoveNumber() );
-        assertEquals( 1,rtf.getMChips().get( 3).getFloor() );
-        assertEquals( 1,rtf.getElevator().getFloor() );
-        assertEquals( 0,rtf.getMoveNumber() );
-    }
 
     @Test
     void executeUpTwoItemsButShouldBeNull() throws CloneNotSupportedException {
@@ -75,19 +61,4 @@ class RtfTest {
         chipList.add( Chip.builder().name( "lithium" ).type( Type.MICROCHIP ).floor( 1 ).build() );
     }
 
-    @Test
-    void generatePossibleMoves() {
-        List<Rtf> result = rtf.generatePossibleMoves();
-        for (Rtf rtf1 : result) {
-            System.out.println( rtf1 );
-        }
-        List<Rtf> temp = new ArrayList<>();
-        for (Rtf r : result) {
-            temp.addAll( r.generatePossibleMoves() );
-        }
-
-
-
-
-    }
 }

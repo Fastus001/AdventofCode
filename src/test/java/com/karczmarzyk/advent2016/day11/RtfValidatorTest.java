@@ -1,7 +1,6 @@
 package com.karczmarzyk.advent2016.day11;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -23,13 +22,6 @@ class RtfValidatorTest {
 
     @Test
     void validateRtfShouldBeOk() {
-        assertTrue( RtfValidator.validateRtf( rtf ));
-    }
-
-    @DisplayName( "second positive test, with two generator and one micro on same floor" )
-    @Test
-    void validateRtfShouldBeOk2() {
-
         assertTrue( RtfValidator.validateRtf( rtf ));
     }
 
