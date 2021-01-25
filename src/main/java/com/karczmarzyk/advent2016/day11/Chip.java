@@ -22,12 +22,32 @@ public class Chip implements Elevatorable, Cloneable{
         floor--;
     }
 
+    protected Chip cloneChip() throws CloneNotSupportedException {
+        return (Chip ) clone();
+    }
+
     @Override
-    protected Chip clone() {
-        return Chip.builder()
-                .type( type )
-                .name( name )
-                .floor( floor )
-                .build();
+    public String toString() {
+        return name.substring( 0,2 ) + type.getName() +"," + floor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        Chip chip = ( Chip ) o;
+
+        if ( floor != chip.floor ) return false;
+        if ( name != null ? !name.equals( chip.name ) : chip.name != null ) return false;
+        return type == chip.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + floor;
+        return result;
     }
 }

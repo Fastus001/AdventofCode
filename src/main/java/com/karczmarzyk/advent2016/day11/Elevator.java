@@ -45,4 +45,9 @@ public class Elevator  implements Elevatorable{
             second.moveDown();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Elevator{" + floor +'}';
+    }
 }
