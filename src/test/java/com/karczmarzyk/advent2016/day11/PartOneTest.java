@@ -13,14 +13,14 @@ class PartOneTest {
     void setUp() {
         List<Chip> chipList = new ArrayList<>();
         setupAddItemsToList( chipList );
-        Elevator elevator = Elevator.builder().floor( 1 ).build();
+        Elevator elevator = Elevator.builder().floor( 4 ).build();
         Rtf rtf = new Rtf( chipList, elevator);
         partOne = new PartOne( rtf.generatePossibleMoves() );
         }
 
     @Test
     void makeMove() {
-        for (int i = 0; i < 35; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println("Runda---------- " + (i+1));
             partOne.makeMove();
         }
@@ -30,14 +30,18 @@ class PartOneTest {
     private void setupAddItemsToList(List<Chip> chipList) {
         chipList.add( Chip.builder().name( "PRomethium" ).type( Type.GENERATOR ).floor( 1 ).build() );
         chipList.add( Chip.builder().name( "PRomethium" ).type( Type.MICROCHIP ).floor( 1 ).build() );
-        chipList.add( Chip.builder().name( "CObalt" ).type( Type.GENERATOR ).floor( 2 ).build() );
-        chipList.add( Chip.builder().name( "CObalt" ).type( Type.MICROCHIP ).floor( 3 ).build() );
-        chipList.add( Chip.builder().name( "CUrium" ).type( Type.GENERATOR ).floor( 2 ).build() );
-        chipList.add( Chip.builder().name( "CUrium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
-        chipList.add( Chip.builder().name( "RUthenium" ).type( Type.GENERATOR ).floor( 2 ).build() );
-        chipList.add( Chip.builder().name( "RUthenium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
-        chipList.add( Chip.builder().name( "PLutonium" ).type( Type.GENERATOR ).floor( 2 ).build() );
-        chipList.add( Chip.builder().name( "PLutonium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
+        chipList.add( Chip.builder().name( "elerium" ).type( Type.GENERATOR ).floor( 1 ).build() );
+        chipList.add( Chip.builder().name( "elerium" ).type( Type.MICROCHIP ).floor( 1 ).build() );
+        chipList.add( Chip.builder().name( "dilithium" ).type( Type.GENERATOR ).floor( 4 ).build() );
+//        chipList.add( Chip.builder().name( "dilithium" ).type( Type.MICROCHIP ).floor( 1 ).build() );
+//        chipList.add( Chip.builder().name( "CObalt" ).type( Type.GENERATOR ).floor( 2 ).build() );
+//        chipList.add( Chip.builder().name( "CObalt" ).type( Type.MICROCHIP ).floor( 3 ).build() );
+//        chipList.add( Chip.builder().name( "CUrium" ).type( Type.GENERATOR ).floor( 2 ).build() );
+//        chipList.add( Chip.builder().name( "CUrium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
+//        chipList.add( Chip.builder().name( "RUthenium" ).type( Type.GENERATOR ).floor( 2 ).build() );
+//        chipList.add( Chip.builder().name( "RUthenium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
+//        chipList.add( Chip.builder().name( "PLutonium" ).type( Type.GENERATOR ).floor( 2 ).build() );
+//        chipList.add( Chip.builder().name( "PLutonium" ).type( Type.MICROCHIP ).floor( 3 ).build() );
     }
 
 
