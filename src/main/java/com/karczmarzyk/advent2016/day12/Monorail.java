@@ -14,7 +14,7 @@ public class Monorail {
     public Monorail() {
         registers.put( "a", 0 );
         registers.put( "b", 0 );
-        registers.put( "c", 0 );
+        registers.put( "c", 1 );
         registers.put( "d", 0 );
     }
 
