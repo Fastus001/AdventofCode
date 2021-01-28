@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 
 public class MdSalt {
     private static final Pattern THREE_SAME = Pattern.compile( "(.)\\1\\1" );
-    private final String salt;
-    private int number = 0;
-    private List<String> keys = new ArrayList<>();
+    protected final String salt;
+    protected int number = 0;
+    protected List<String> keys = new ArrayList<>();
 
     public MdSalt(String salt) {
         this.salt = salt;
@@ -39,7 +39,7 @@ public class MdSalt {
     }
 
     @NotNull
-    private String getMatchingString(String hash) {
+    protected String getMatchingString(String hash) {
         int index = getIndexOfChars( hash );
         String temp = hash.substring( index, index + 3 );
         temp+=temp.substring( 1 );
