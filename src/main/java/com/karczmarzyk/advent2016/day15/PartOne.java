@@ -9,7 +9,7 @@ public class PartOne {
         List<Disc> discs = new ArrayList<>();
 
         initValues( discs );
-        for (int i = 0; i < 1_000_000; i++) {
+        for (int i = 0; i < 10_000_000; i++) {
             int positionAtTime = 0;
             for (int j = 0; j < discs.size(); j++) {
                 positionAtTime += discs.get( j ).getPositionAtTime( i + j );
@@ -29,5 +29,7 @@ public class PartOne {
         discs.add( new Disc( 5, 0 ) );
         discs.add( new Disc( 3, 0 ) );
         discs.add( new Disc( 13, 5 ) );
+        //part two element
+        discs.add( new Disc( 11, 0 ) );
     }
 }
