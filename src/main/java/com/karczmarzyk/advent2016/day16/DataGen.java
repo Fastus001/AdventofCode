@@ -10,13 +10,30 @@ public class DataGen {
     }
 
 
-    public String generate(String init){
+
+    public String generateChecksum(String data){
+        var sb = new StringBuilder();
+        for (int i = 0; i < data.length(); i+=2) {
+            if ( data.charAt( i ) == data.charAt( i + 1 ) ) {
+                sb.append( 1 );
+            }
+            else {
+                sb.append( 0 );
+            }
+        }
+        if(sb.length()%2==0){
+            return generateChecksum( sb.toString() );
+        }else
+            return sb.toString();
+    }
+
+    public String generateData(String init){
         if(init.length()>=desiredSize){
             return init.substring( 0,desiredSize );
         }else{
             init = init+"0"+reverseString( init);
         }
-        return generate( init);
+        return generateData( init);
     }
 
     @NotNull

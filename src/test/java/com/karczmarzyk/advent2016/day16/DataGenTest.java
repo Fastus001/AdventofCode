@@ -15,7 +15,23 @@ class DataGenTest {
 
     @Test
     void generate() {
-        String generateChecksum = gen.generate("10000");
+        String generateChecksum = gen.generateData( "10000");
         assertEquals( "10000011110010000111", generateChecksum);
     }
+
+    @Test
+    void generateChecksum() {
+        String result = gen.generateChecksum( "110010110100" );
+
+        assertEquals( "100",result );
+    }
+
+    @Test
+    void testTestCase(){
+        String result = gen.generateChecksum( gen.generateData( "10000" ) );
+
+        assertEquals( "01100",result );
+    }
+
+
 }
