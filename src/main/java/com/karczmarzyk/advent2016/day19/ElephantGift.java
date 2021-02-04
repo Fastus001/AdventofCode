@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class ElephantGift {
     private final LinkedList<Integer> seats;
     private boolean keep = true;
+    private int index = 1;
 
     public ElephantGift(int size) {
         seats = new LinkedList<>();

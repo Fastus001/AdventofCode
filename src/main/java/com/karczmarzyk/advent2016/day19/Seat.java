@@ -1,20 +1,33 @@
 package com.karczmarzyk.advent2016.day19;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Seat {
     private int number;
-    private Seat previous;
-    private Seat next;
+    public Seat previous;
+    public Seat next;
 
-    public void joinNext(Seat next){
-        this.next = next;
-        next.setPrevious( this );
+    public Seat(int number) {
+        this.number = number;
+        previous = null;
+        next = null;
     }
 
-    public void joinPrevious(Seat previous){
-        this.previous = previous;
-        previous.next = this;
+    public void joinPrevious(Seat seat){
+        previous = seat;
+        seat.next = this;
+    }
+
+    public void joinNext(Seat seat){
+        next = seat;
+        seat.previous = this;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" + number +'}';
     }
 }
