@@ -10,7 +10,6 @@ public class GiftAcross {
     private final Map<Integer,Seat> seatMap = new HashMap<>();
     private Seat currentSeat;
     private Seat searchSeat;
-    private int size;
 
     public GiftAcross(int size) {
         for (int i = 1; i <=size ; i++) {
@@ -19,7 +18,6 @@ public class GiftAcross {
         seatMap.forEach( linkSeats() );
         seatMap.get( 1 ).joinPrevious( seatMap.get( size ) );
         currentSeat = seatMap.get( 1 );
-        this.size =size;
     }
 
     @NotNull
@@ -32,45 +30,33 @@ public class GiftAcross {
     }
 
     public void checkAcrossFirstSieve(){
-        int noOfMoves = (size / 2);
-        searchSeat = seatMap.get( noOfMoves++ );
-//        System.out.println( "searchSeat = " + searchSeat );
-        while (searchSeat.getNumber()<size){
-            searchSeat = seatMap.get( noOfMoves++ );
-//            System.out.println( "searchSeat = " + searchSeat );
-            searchSeat.previous.joinNext( searchSeat.next );
-            seatMap.remove( searchSeat.getNumber() );
-            currentSeat = currentSeat.getNext();
-            size--;
-
-            searchSeat = seatMap.get( noOfMoves++ );
-//            System.out.println( "searchSeat = " + searchSeat );
-            searchSeat.previous.joinNext( searchSeat.next );
-            seatMap.remove( searchSeat.getNumber() );
-            currentSeat = currentSeat.getNext();
-            size--;
-
-            searchSeat = seatMap.get( noOfMoves++ );
-//            System.out.println( "searchSeat = " + searchSeat );
+        searchSeat = seatMap.get( (seatMap.size() / 2));
+        boolean even = (seatMap.size()) % 2 == 0;
+        while (seatMap.size()>1){
+            removeItemAcross();
+            if(!even) {
+                moveToNext();
+            }
+            removeItemAcross();
+            if(even) {
+                moveToNext();
+            }
         }
-
     }
 
-    public void  checkAcross(){
-        int noOfMoves = size / 2;
-        searchSeat = currentSeat;
-//        System.out.println( "searchSeat before= " + searchSeat );
-        for (int i = 0; i < noOfMoves; i++) {
-            searchSeat = searchSeat.next;
-        }
-//        System.out.println( "searchSeat = " + searchSeat );
+    private void removeFromMap() {
         searchSeat.previous.joinNext( searchSeat.next );
-        seatMap.remove( searchSeat.getNumber());
-//        System.out.println( "map size = " + seatMap.size());
+        seatMap.remove( searchSeat.getNumber() );
         currentSeat = currentSeat.getNext();
-        size--;
-//        System.out.println( "currentSeat = " + currentSeat );
-//        System.out.println( "seatMap = " + seatMap );
+    }
+
+    private void removeItemAcross() {
+        moveToNext();
+        removeFromMap();
+    }
+
+    private void moveToNext() {
+        searchSeat = seatMap.get( searchSeat.next.getNumber() );
     }
 
     public Seat getCurrentSeat() {
