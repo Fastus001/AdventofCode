@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.Long.parseLong;
@@ -20,29 +19,18 @@ public class Main {
 
         List<IpRange> ranges = getIpRanges( allLines );
 
-        while (ranges.size()>141){
+        while (ranges.size()>102){
             ranges = filterJoin( ranges );
         }
+        ranges.sort( IpRange::compareTo );
 
         long result = 0;
-        for (long i = 0; i <= MAX; i++) {
-            long finalI = i;
-            Optional<IpRange> firstOptional = checkIpAgainstRules( ranges, finalI );
-            if(firstOptional.isEmpty()){
-                result = i;
-                break;
-            }
-
+        //we need to deduct one because both sides are inclusive to the firewall!!
+        for (int i = 0; i < ranges.size()-1; i++) {
+            result += (ranges.get( i+1 ).getMin()-ranges.get( i ).getMax())-1;
         }
         System.out.println( "result = " + result );
 
-    }
-
-    @NotNull
-    private static Optional<IpRange> checkIpAgainstRules(List<IpRange> ranges, long finalI) {
-        return ranges.stream()
-                .filter( r -> r.isNumberInRange( finalI ) )
-                .findFirst();
     }
 
     @NotNull
