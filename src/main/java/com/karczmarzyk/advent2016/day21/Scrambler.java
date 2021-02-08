@@ -1,7 +1,7 @@
 package com.karczmarzyk.advent2016.day21;
 
 public class Scrambler {
-    private int size;
+    private final int size;
     private char[] pass;
 
     public Scrambler(String pass) {

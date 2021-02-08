@@ -3,7 +3,7 @@ package com.karczmarzyk.advent2016.day21;
 import static java.lang.Integer.parseInt;
 
 public class Parser {
-    private Scrambler scrambler;
+    private final Scrambler scrambler;
 
     public Parser(Scrambler scrambler) {
         this.scrambler = scrambler;
