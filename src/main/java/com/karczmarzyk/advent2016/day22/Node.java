@@ -19,4 +19,10 @@ public class Node {
         this.used = used;
         this.avail = avail;
     }
+
+    @Override
+    public String toString() {
+        return "("+ size+"/"+used +
+                "/" + avail+')';
+    }
 }

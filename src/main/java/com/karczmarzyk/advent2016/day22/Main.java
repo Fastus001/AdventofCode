@@ -39,5 +39,27 @@ public class Main {
         }
 
         System.out.println( "counter = " + counter );
+        for (int y = 0; y < 25; y++) {
+            for (int x = 0; x < 35; x++) {
+                int finalY = y;
+                int finalX = x;
+                Node node = nodes.stream().filter( n -> n.getX() == finalX && n.getY() == finalY )
+                        .findFirst()
+                        .orElseThrow();
+                if(node.getSize()>300){
+                    System.out.print("x");
+                }else if(node.getX()==0 && node.getY()==0){
+                    System.out.print("!");
+                }else if(node.getX()==34 && node.getY()==0){
+                    System.out.print("G");
+                }else if(node.getUsed()==0){
+                    System.out.print("E");
+                }else {
+                    System.out.print(".");
+                }
+            }
+            System.out.println();
+        }
+
     }
 }
