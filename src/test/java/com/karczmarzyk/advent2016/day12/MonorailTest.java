@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -93,5 +95,43 @@ class MonorailTest {
 
         assertEquals(1,returnVal);
         assertEquals(-1,monorail.getRegisters().get( "d" ));
+    }
+
+    @Test
+    void testSkippingWrongCopyInstruction(){
+        Instruction cpyBad = new Instruction( "cpy 1 2" );
+
+        int returnVal = monorail.executeInstruction( cpyBad );
+        assertEquals(1,returnVal);
+        assertEquals(0,monorail.getRegisters().get( "a" ));
+        assertEquals(0,monorail.getRegisters().get( "b" ));
+        assertEquals(0,monorail.getRegisters().get( "c" ));
+        assertEquals(0,monorail.getRegisters().get( "d" ));
+    }
+
+    @Test
+    void testToggleIncrease(){
+        Monorail monorail23 = new Monorail();
+        monorail23.setInstructions( getTestInstructions() );
+        int size = monorail23.getInstructions().size();
+
+        int result = -1;
+        while (monorail23.getCurrentIndex()<size){
+            result = monorail23.start();
+        }
+
+        assertEquals( 3, result );
+    }
+
+    private List<String> getTestInstructions() {
+        List<String> temp = new ArrayList<>();
+        temp.add( "cpy 2 a" );
+        temp.add( "tgl a" );
+        temp.add( "tgl a" );
+        temp.add( "tgl a" );
+        temp.add( "cpy 1 a" );
+        temp.add( "dec a" );
+        temp.add( "dec a" );
+        return temp;
     }
 }

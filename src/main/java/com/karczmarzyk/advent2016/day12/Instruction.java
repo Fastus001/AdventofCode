@@ -2,10 +2,12 @@ package com.karczmarzyk.advent2016.day12;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Instruction {
-    private final String code;
+    private String code;
     private final String first;
     private final String second;
 
@@ -15,6 +17,8 @@ public class Instruction {
         first = s[1];
         second = s.length > 2 ? s[2] : null;
     }
+
+
 
     @Override
     public String toString() {

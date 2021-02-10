@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 
 public class Monorail {
     private List<Instruction> instructions = new ArrayList<>();
-    private Map<String, Integer> registers = new HashMap<>();
-    private static int currentIndex = 0;
+    private final Map<String, Integer> registers = new HashMap<>();
+    private int currentIndex = 0;
 
     public Monorail() {
-        registers.put( "a", 0 );
+        registers.put( "a", 7 );
         registers.put( "b", 0 );
-        registers.put( "c", 1 );
+        registers.put( "c", 0 );
         registers.put( "d", 0 );
     }
 
@@ -36,13 +36,16 @@ public class Monorail {
                 return 1;
 
             case "cpy":
-                String first = instruction.getFirst();
-                Integer integer = registers.get( first );
-                if ( integer == null ) {
-                    registers.put( instruction.getSecond(), Integer.parseInt( first ) );
-                }
-                else {
-                    registers.put( instruction.getSecond(), registers.get( first ) );
+                String second = instruction.getSecond();
+                if(second.matches( "[abcd]" )){
+                    String first = instruction.getFirst();
+                    Integer integer = registers.get( first );
+                    if ( integer == null ) {
+                        registers.put( instruction.getSecond(), Integer.parseInt( first ) );
+                    }
+                    else {
+                        registers.put( instruction.getSecond(), registers.get( first ) );
+                    }
                 }
                 return 1;
 
@@ -53,7 +56,11 @@ public class Monorail {
                     if(i==0){
                         return 1;
                     }else{
-                        return Integer.parseInt( instruction.getSecond() );
+                        if(instruction.getSecond().matches( "[abcd]" )){
+                            return registers.get( instruction.getSecond() );
+                        }else {
+                            return Integer.parseInt( instruction.getSecond() );
+                        }
                     }
                 }else{
                     if ( registryValue.equals( 0 ) ) {
@@ -63,8 +70,20 @@ public class Monorail {
                         return Integer.parseInt( instruction.getSecond() );
                     }
                 }
+            case "tgl":
+                Integer regValue = registers.get( instruction.getFirst() );
+                if(regValue+currentIndex>=0 && regValue+currentIndex < instructions.size()){
+                    Instruction instrToToggle = instructions.get( regValue+currentIndex );
+                    switch (instrToToggle.getCode()){
+                        case "inc": instrToToggle.setCode( "dec" ); return 1;
+                        case "dec":
+                        case "tgl": instrToToggle.setCode( "inc" );return 1;
+                        case "jnz": instrToToggle.setCode( "cpy" );return 1;
+                        case "cpy": instrToToggle.setCode( "jnz" );return 1;
+                    }
+                }
         }
-        return 0;
+        return 1;
     }
 
     public void setInstructions(List<String> lines) {
@@ -81,7 +100,7 @@ public class Monorail {
         return instructions;
     }
 
-    public static int getCurrentIndex() {
+    public int getCurrentIndex() {
         return currentIndex;
     }
 }
