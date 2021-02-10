@@ -12,7 +12,7 @@ public class Monorail {
     private int currentIndex = 0;
 
     public Monorail() {
-        registers.put( "a", 7 );
+        registers.put( "a", 12 );
         registers.put( "b", 0 );
         registers.put( "c", 0 );
         registers.put( "d", 0 );
@@ -27,7 +27,8 @@ public class Monorail {
         switch (instruction.getCode()) {
             case "inc":
                 Integer value = registers.get( instruction.getFirst() );
-                registers.put( instruction.getFirst(), value + 1 );
+                value += 1;
+                registers.put( instruction.getFirst(),value  );
                 return 1;
 
             case "dec":

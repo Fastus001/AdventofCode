@@ -14,10 +14,13 @@ public class Main {
                 Files.readAllLines( Path.of( "src/main/resources/2016/day23/input.txt" ) ));
         int size = partOne.getInstructions().size();
         int partOneResult = 0;
-
+        int counter = 0;
         while (partOne.getCurrentIndex()<size){
-            partOneResult = partOne.start();
-//            System.out.println(partOne.getRegisters());
+                partOneResult = partOne.start();
+                if(counter%10000000==0){
+                    System.out.println(partOne.getRegisters() + " " + partOne.getCurrentIndex());
+                }
+            counter++;
         }
 
         System.out.println(partOneResult);
