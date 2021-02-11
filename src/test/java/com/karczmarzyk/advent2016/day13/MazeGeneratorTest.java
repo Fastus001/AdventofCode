@@ -3,6 +3,10 @@ package com.karczmarzyk.advent2016.day13;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MazeGeneratorTest {
@@ -20,4 +24,11 @@ class MazeGeneratorTest {
         assertEquals( '#',mazeGenerator.generate( 1,0 ));
     }
 
+    @Test
+    void showMaze() throws IOException {
+        MazeGenerator generator =
+                new MazeGenerator( Files.readAllLines( Path.of( "src/main/resources/2016/day24/input.txt" ) ) );
+
+        generator.showMaze();
+    }
 }

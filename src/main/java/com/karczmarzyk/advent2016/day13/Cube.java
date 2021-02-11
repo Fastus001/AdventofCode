@@ -5,8 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Cube {
+public class Cube implements Cloneable{
     private char tile;
+    private char original;
     private int move = 0;
     private int row;
     private int col;
@@ -15,6 +16,12 @@ public class Cube {
         this.tile = tile;
         this.row = row;
         this.col = col;
+        this.original = tile;
+    }
+
+    public void reset(){
+        tile  = original;
+        move = 0;
     }
 
     public boolean isEmpty() {
@@ -24,4 +31,5 @@ public class Cube {
     public boolean hasMove() {
         return move != 0;
     }
+
 }

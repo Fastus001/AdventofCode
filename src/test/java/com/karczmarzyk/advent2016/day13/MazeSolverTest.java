@@ -22,14 +22,8 @@ class MazeSolverTest {
     }
 
     @Test
-    void showMazeAfterInitialization(){
-        solver.showMaze();
-    }
-
-    @Test
     void start() {
         int numberOfMoves = solver.start();
-
 
         assertEquals( 11, numberOfMoves);
         solver.showMaze();

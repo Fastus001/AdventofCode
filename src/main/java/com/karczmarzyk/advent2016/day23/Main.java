@@ -17,7 +17,7 @@ public class Main {
         int counter = 0;
         while (partOne.getCurrentIndex()<size){
                 partOneResult = partOne.start();
-                if(counter%10000000==0){
+                if(partOne.getCurrentIndex()==2){
                     System.out.println(partOne.getRegisters() + " " + partOne.getCurrentIndex());
                 }
             counter++;
