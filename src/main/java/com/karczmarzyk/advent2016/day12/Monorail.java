@@ -1,18 +1,22 @@
 package com.karczmarzyk.advent2016.day12;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Getter
 public class Monorail {
     private List<Instruction> instructions = new ArrayList<>();
     private final Map<String, Integer> registers = new HashMap<>();
     private int currentIndex = 0;
+    private final List<Integer> results = new ArrayList<>();
 
     public Monorail() {
-        registers.put( "a", 12 );
+        registers.put( "a", 0 );
         registers.put( "b", 0 );
         registers.put( "c", 0 );
         registers.put( "d", 0 );
@@ -23,12 +27,45 @@ public class Monorail {
         return registers.get( "a" );
     }
 
+    public void setAndReset(int a) {
+        registers.put( "a", a );
+//        registers.put( "b", 0 );
+//        registers.put( "c", 0 );
+//        registers.put( "d", 0 );
+        currentIndex = 0;
+        results.clear();
+    }
+
+    public int getSizeOfResult() {
+        return results.size();
+    }
+
+    public boolean isResultsOk() {
+        for (int i = 0; i < results.size(); i++) {
+            if ( i % 2 == 1 ) {
+                if ( results.get( i ) == 0 ) {
+                    return false;
+                }
+            }
+            if ( i % 2 == 0 ) {
+                if ( results.get( i ) == 1 ) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public int executeInstruction(Instruction instruction) {
         switch (instruction.getCode()) {
+            case "out":
+//                System.out.println(registers.get( instruction.getFirst() ));
+                results.add( registers.get( instruction.getFirst() ) );
+                System.out.println( "registers = " + registers );
+                return 1;
             case "inc":
                 Integer value = registers.get( instruction.getFirst() );
-                value += 1;
-                registers.put( instruction.getFirst(),value  );
+                registers.put( instruction.getFirst(), value+1 );
                 return 1;
 
             case "dec":
@@ -38,7 +75,7 @@ public class Monorail {
 
             case "cpy":
                 String second = instruction.getSecond();
-                if(second.matches( "[abcd]" )){
+                if ( second.matches( "[abcd]" ) ) {
                     String first = instruction.getFirst();
                     Integer integer = registers.get( first );
                     if ( integer == null ) {
@@ -52,18 +89,21 @@ public class Monorail {
 
             case "jnz":
                 Integer registryValue = registers.get( instruction.getFirst() );
-                if(registryValue==null){
+                if ( registryValue == null ) {
                     int i = Integer.parseInt( instruction.getFirst() );
-                    if(i==0){
+                    if ( i == 0 ) {
                         return 1;
-                    }else{
-                        if(instruction.getSecond().matches( "[abcd]" )){
+                    }
+                    else {
+                        if ( instruction.getSecond().matches( "[abcd]" ) ) {
                             return registers.get( instruction.getSecond() );
-                        }else {
+                        }
+                        else {
                             return Integer.parseInt( instruction.getSecond() );
                         }
                     }
-                }else{
+                }
+                else {
                     if ( registryValue.equals( 0 ) ) {
                         return 1;
                     }
@@ -73,14 +113,22 @@ public class Monorail {
                 }
             case "tgl":
                 Integer regValue = registers.get( instruction.getFirst() );
-                if(regValue+currentIndex>=0 && regValue+currentIndex < instructions.size()){
-                    Instruction instrToToggle = instructions.get( regValue+currentIndex );
-                    switch (instrToToggle.getCode()){
-                        case "inc": instrToToggle.setCode( "dec" ); return 1;
+                if ( regValue + currentIndex >= 0 && regValue + currentIndex < instructions.size() ) {
+                    Instruction instrToToggle = instructions.get( regValue + currentIndex );
+                    switch (instrToToggle.getCode()) {
+                        case "inc":
+                            instrToToggle.setCode( "dec" );
+                            return 1;
                         case "dec":
-                        case "tgl": instrToToggle.setCode( "inc" );return 1;
-                        case "jnz": instrToToggle.setCode( "cpy" );return 1;
-                        case "cpy": instrToToggle.setCode( "jnz" );return 1;
+                        case "tgl":
+                            instrToToggle.setCode( "inc" );
+                            return 1;
+                        case "jnz":
+                            instrToToggle.setCode( "cpy" );
+                            return 1;
+                        case "cpy":
+                            instrToToggle.setCode( "jnz" );
+                            return 1;
                     }
                 }
         }
@@ -90,7 +138,8 @@ public class Monorail {
     public void setInstructions(List<String> lines) {
         this.instructions = lines.stream()
                 .map( Instruction::new )
-                .collect( Collectors.toList());;
+                .collect( Collectors.toList() );
+        ;
     }
 
     public Map<String, Integer> getRegisters() {
