@@ -1,6 +1,7 @@
 package com.karczmarzyk.advent2016.day12;
 
 import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,41 +28,10 @@ public class Monorail {
         return registers.get( "a" );
     }
 
-    public void setAndReset(int a) {
-        registers.put( "a", a );
-//        registers.put( "b", 0 );
-//        registers.put( "c", 0 );
-//        registers.put( "d", 0 );
-        currentIndex = 0;
-        results.clear();
-    }
-
-    public int getSizeOfResult() {
-        return results.size();
-    }
-
-    public boolean isResultsOk() {
-        for (int i = 0; i < results.size(); i++) {
-            if ( i % 2 == 1 ) {
-                if ( results.get( i ) == 0 ) {
-                    return false;
-                }
-            }
-            if ( i % 2 == 0 ) {
-                if ( results.get( i ) == 1 ) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public int executeInstruction(Instruction instruction) {
         switch (instruction.getCode()) {
             case "out":
-//                System.out.println(registers.get( instruction.getFirst() ));
                 results.add( registers.get( instruction.getFirst() ) );
-                System.out.println( "registers = " + registers );
                 return 1;
             case "inc":
                 Integer value = registers.get( instruction.getFirst() );
@@ -102,8 +72,7 @@ public class Monorail {
                             return Integer.parseInt( instruction.getSecond() );
                         }
                     }
-                }
-                else {
+                }else {
                     if ( registryValue.equals( 0 ) ) {
                         return 1;
                     }
@@ -113,33 +82,43 @@ public class Monorail {
                 }
             case "tgl":
                 Integer regValue = registers.get( instruction.getFirst() );
-                if ( regValue + currentIndex >= 0 && regValue + currentIndex < instructions.size() ) {
-                    Instruction instrToToggle = instructions.get( regValue + currentIndex );
-                    switch (instrToToggle.getCode()) {
-                        case "inc":
-                            instrToToggle.setCode( "dec" );
-                            return 1;
-                        case "dec":
-                        case "tgl":
-                            instrToToggle.setCode( "inc" );
-                            return 1;
-                        case "jnz":
-                            instrToToggle.setCode( "cpy" );
-                            return 1;
-                        case "cpy":
-                            instrToToggle.setCode( "jnz" );
-                            return 1;
-                    }
+                if ( isValueInsideInstructionsRange( regValue ) ) {
+                    Integer x = toggleInstruction( regValue );
+                    if ( x != null ) return x;
                 }
         }
         return 1;
+    }
+
+    private boolean isValueInsideInstructionsRange(Integer regValue) {
+        return regValue + currentIndex >= 0 && regValue + currentIndex < instructions.size();
+    }
+
+    @Nullable
+    private Integer toggleInstruction(Integer regValue) {
+        Instruction instrToToggle = instructions.get( regValue + currentIndex );
+        switch (instrToToggle.getCode()) {
+            case "inc":
+                instrToToggle.setCode( "dec" );
+                return 1;
+            case "dec":
+            case "tgl":
+                instrToToggle.setCode( "inc" );
+                return 1;
+            case "jnz":
+                instrToToggle.setCode( "cpy" );
+                return 1;
+            case "cpy":
+                instrToToggle.setCode( "jnz" );
+                return 1;
+        }
+        return null;
     }
 
     public void setInstructions(List<String> lines) {
         this.instructions = lines.stream()
                 .map( Instruction::new )
                 .collect( Collectors.toList() );
-        ;
     }
 
     public Map<String, Integer> getRegisters() {
@@ -152,5 +131,32 @@ public class Monorail {
 
     public int getCurrentIndex() {
         return currentIndex;
+    }
+
+    ///Day 25
+    public void setAndReset(int a) {
+        registers.put( "a", a );
+        currentIndex = 0;
+        results.clear();
+    }
+
+    public int getSizeOfResult() {
+        return results.size();
+    }
+
+    public boolean isResultsOk() {
+        for (int i = 0; i < results.size(); i++) {
+            if ( i % 2 == 1 ) {
+                if ( results.get( i ) == 0 ) {
+                    return false;
+                }
+            }
+            if ( i % 2 == 0 ) {
+                if ( results.get( i ) == 1 ) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

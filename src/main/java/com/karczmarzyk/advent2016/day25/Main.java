@@ -12,30 +12,22 @@ public class Main {
         partOne.setInstructions(
                 Files.readAllLines( Path.of( "src/main/resources/2016/day25/input.txt" ) ));
         boolean check = false;
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+        for (int i = 0; i < Integer.MAX_VALUE; ++i) {
             if(check){
                 break;
             }
-
+            partOne.setAndReset( i );
             while (true){
                 partOne.start();
-//                System.out.println( "partOne.getRegisters() = " + partOne.getRegisters() );
-                if(partOne.getSizeOfResult()==10){
-                    if(!partOne.isResultsOk()){
-                        System.out.println( "partOne = " + partOne.getResults() );
-                        partOne.setAndReset( i );
-                        System.out.println( "reset " + i );
-                    }else{
+                if(partOne.getSizeOfResult()==20){
+                    if(partOne.isResultsOk()){
                         System.out.println( "partOne = " + partOne.getResults() );
                         System.out.println("koniec" +i);
                         check = true;
                     }
                     break;
                 }
-
             }
-
         }
      }
-
 }
