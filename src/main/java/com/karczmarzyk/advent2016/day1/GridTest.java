@@ -3,10 +3,12 @@ package com.karczmarzyk.advent2016.day1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GridTest {
+
     private Grid grid;
+
     @BeforeEach
     public void setup()
     {
