@@ -36,4 +36,22 @@ class TrampolineTest {
 
         assertEquals(336905, result);
     }
+
+    @Test
+    void startPartTwoTestInput() {
+        trampoline.loadData(List.of("0","3","0","1","-3"));
+
+        int result = trampoline.startPartTwo();
+
+        assertEquals(10, result);
+    }
+
+    @Test
+    void startPartTwoTest() throws IOException {
+        trampoline.loadData(Files.readAllLines(Path.of("src/main/resources/2017/day5/day5.txt")));
+
+        int result = trampoline.startPartTwo();
+
+        assertEquals(21985262, result);
+    }
 }

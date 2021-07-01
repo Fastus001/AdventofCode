@@ -23,8 +23,24 @@ public class Trampoline {
 
     public int start(){
         while (currentLevel<maxLevel){
-            Integer nextLevel = currentLevel + jumps.get(currentLevel);
+            int nextLevel = currentLevel + jumps.get(currentLevel);
             jumps.put(currentLevel, jumps.get(currentLevel)+1);
+            currentLevel = nextLevel;
+            numberOfMoves++;
+        }
+        return numberOfMoves;
+    }
+
+    public int startPartTwo(){
+        while (currentLevel<maxLevel){
+            int offset = jumps.get(currentLevel);
+            int nextLevel;
+            nextLevel = currentLevel + jumps.get(currentLevel);
+            if(offset>=3){
+                jumps.put(currentLevel, jumps.get(currentLevel)-1);
+            }else {
+                jumps.put(currentLevel, jumps.get(currentLevel)+1);
+            }
             currentLevel = nextLevel;
             numberOfMoves++;
         }
