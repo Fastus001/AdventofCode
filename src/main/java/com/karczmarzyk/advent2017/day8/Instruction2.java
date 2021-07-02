@@ -12,6 +12,7 @@ import static java.lang.Integer.valueOf;
 public class Instruction2 {
     private final Map<String, Integer> registers = new HashMap<>();
     private final List<String> instructionsList;
+    private Integer max = 0;
 
     public Instruction2(List<String> input) {
         this.instructionsList = input;
@@ -25,12 +26,23 @@ public class Instruction2 {
                     if(condition(strings[1])){
                         executeInstruction(strings[0]);
                     }
+                    checkMax();
                 });
 
         return registers.values()
                 .stream()
                 .max(Integer::compareTo)
                 .orElse(-1);
+    }
+
+    private void checkMax(){
+        Integer maxAfterIteration = registers.values()
+                .stream()
+                .max(Integer::compareTo)
+                .orElse(-1);
+        if(maxAfterIteration>max){
+            max = maxAfterIteration;
+        }
     }
 
     public void executeInstruction(String instr){

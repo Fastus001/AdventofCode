@@ -42,8 +42,10 @@ class Instruction2Test {
         ));
 
         int result = test.start();
+        Integer max = test.getMax();
 
         assertEquals(1, result);
+        assertEquals(10, max);
     }
 
     @Test
@@ -51,7 +53,9 @@ class Instruction2Test {
         Instruction2 partOne = new Instruction2(Files.readAllLines(Path.of("src/main/resources/2017/day8/input.txt")));
 
         int result = partOne.start();
+        Integer max = partOne.getMax();
 
         assertEquals(5752, result);
+        assertEquals(6366, max);
     }
 }
