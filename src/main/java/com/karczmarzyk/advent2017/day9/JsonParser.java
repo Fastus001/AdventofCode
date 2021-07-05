@@ -1,6 +1,10 @@
 package com.karczmarzyk.advent2017.day9;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JsonParser {
+    public static List<String> garbage = new ArrayList<>();
 
     public static String cleanCanceled(String input) {
         if(input.contains("!")){
@@ -18,6 +22,7 @@ public class JsonParser {
         if(input.contains("<")){
             int start = input.indexOf("<");
             int end = input.indexOf(">");
+            garbage.add(input.substring(start+1, end));
             return JsonParser.removeGarbage(input.substring(0,start) + input.substring(end+1));
         }
         return input;
@@ -36,6 +41,12 @@ public class JsonParser {
             }
         }
         return sum;
+    }
+
+    public static int countGarbage(){
+        return garbage.stream()
+                .mapToInt(String::length)
+                .sum();
     }
 
 }

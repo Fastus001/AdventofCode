@@ -33,10 +33,14 @@ class JsonParserTest {
 
         String result = JsonParser.cleanCanceled(input);
         result = JsonParser.removeGarbage(result);
-        int sum = JsonParser.count(result);
 
-        System.out.println(sum);
+        //part one
+        int sum = JsonParser.count(result);
+        //part two
+        int garbageCount = JsonParser.countGarbage();
+
         assertEquals(17537, sum);
+        assertEquals(7539, garbageCount);
     }
 
     @Test
