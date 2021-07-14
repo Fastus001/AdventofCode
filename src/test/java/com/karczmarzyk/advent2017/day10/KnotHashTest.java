@@ -55,4 +55,34 @@ class KnotHashTest {
 
         assertEquals(23874, result);
     }
+
+    @Test
+    void partTwoTestInputs() {
+        KnotHash knotHash = new KnotHash(256);
+
+        final int[] ints = Util.parseInput("1,2,3");
+
+        for (int i = 0; i < 64; i++) {
+            knotHash.start(ints);
+        }
+
+        String hash = Util.densHash(knotHash.getNumbers());
+
+        assertEquals("3efbe78a8d82f29979031a4aa0b16a9d", hash);
+    }
+
+    @Test
+    void partTwoTest() {
+        KnotHash knotHash = new KnotHash(256);
+
+        final int[] ints = Util.parseInput("225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110");
+
+        for (int i = 0; i < 64; i++) {
+            knotHash.start(ints);
+        }
+
+        String hash = Util.densHash(knotHash.getNumbers());
+
+        assertEquals("e1a65bfb5a5ce396025fab5528c25a87", hash);
+    }
 }
