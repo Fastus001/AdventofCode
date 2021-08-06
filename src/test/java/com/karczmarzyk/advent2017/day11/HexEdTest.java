@@ -22,12 +22,13 @@ class HexEdTest {
     @Test
     void testFirstPart() throws IOException {
         String inputLine = Files.readString(Path.of("src/main/resources/2017/day11/input.txt"));
-//        String inputLine = Files.readString(Path.of("src/main/resources/2017/day11/input2.txt"));
 
         HexEd firstPart = new HexEd(inputLine);
 
         int result = firstPart.getSteps();
+        int maxDistance = firstPart.getMax();
 
-        assertEquals(3, result);
+        assertEquals(761, result);
+        assertEquals(1542, maxDistance);
     }
 }
