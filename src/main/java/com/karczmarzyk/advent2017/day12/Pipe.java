@@ -12,12 +12,11 @@ public class Pipe {
     private final Integer number;
     private final List<Integer> programsId;
     private List<Pipe> pipes = new ArrayList<>();
-    private boolean zeroLinked;
+    private boolean zeroLinked = false;
 
     public Pipe(Integer number, List<Integer> programsId) {
         this.number = number;
         this.programsId = programsId;
-        zeroLinked = number.equals(0);
     }
 
     public void setPipes(Map<Integer, Pipe> records) {
@@ -27,6 +26,7 @@ public class Pipe {
     }
 
     public void setZeroLinkedTrue() {
+        this.zeroLinked = true;
         List<Pipe> list = pipes.stream().filter(pipe -> !pipe.zeroLinked)
                 .collect(Collectors.toList());
         list.forEach(pipe -> pipe.setZeroLinked(true));

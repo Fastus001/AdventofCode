@@ -32,9 +32,16 @@ class DigitalPlumberTest {
 
     @Test
     void testExecute() {
-        dp.execute();
+        dp.markGroup(0);
 
         assertEquals(6, dp.getConnectedProgramsNo());
+    }
+
+    @Test
+    void testTestCasePartTwo() {
+        int groupCounter = dp.getGroupCounter();
+
+        assertEquals(2, groupCounter);
     }
 
     @Test
@@ -42,9 +49,19 @@ class DigitalPlumberTest {
         input = Files.readAllLines(Path.of("src/main/resources/2017/day12/input.txt"));
         DigitalPlumber digitalPlumber = new DigitalPlumber(input);
 
-        digitalPlumber.execute();
+        digitalPlumber.markGroup(0);
 
         assertEquals(145, digitalPlumber.getConnectedProgramsNo());
+    }
+
+    @Test
+    void testPartTwoSolution() throws IOException {
+        input = Files.readAllLines(Path.of("src/main/resources/2017/day12/input.txt"));
+        DigitalPlumber digitalPlumber = new DigitalPlumber(input);
+
+        int groupCounter = digitalPlumber.getGroupCounter();
+
+        assertEquals(207, groupCounter);
     }
 
 }
