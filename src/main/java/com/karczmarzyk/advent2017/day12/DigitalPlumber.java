@@ -34,7 +34,8 @@ public class DigitalPlumber {
                     .stream()
                     .findFirst()
                     .ifPresent(entry -> markGroup(entry.getKey()));
-            records =records.entrySet().stream()
+            records =records.entrySet()
+                    .stream()
                     .filter(entries->!entries.getValue().isZeroLinked())
                     .collect(toMap(Entry::getKey, Entry::getValue));
             groupCounter++;
