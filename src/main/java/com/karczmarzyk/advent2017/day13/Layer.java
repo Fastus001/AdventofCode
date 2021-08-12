@@ -12,6 +12,12 @@ public class Layer {
         this.size = size;
     }
 
+    public Layer(int size, Direction direction, int position) {
+        this.size = size;
+        this.direction = direction;
+        this.position = position;
+    }
+
     public void move() {
         position += direction.step;
         if(position == size) {
@@ -24,5 +30,10 @@ public class Layer {
 
     public int getSeverity(int i) {
         return i*size;
+    }
+
+    public void reset() {
+        position = 1;
+        direction = Direction.UP;
     }
 }

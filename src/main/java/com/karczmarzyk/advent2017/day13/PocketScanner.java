@@ -2,9 +2,9 @@ package com.karczmarzyk.advent2017.day13;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
+import static java.util.stream.Collectors.toMap;
 
 public class PocketScanner {
     private final int maxLayer;
@@ -13,7 +13,7 @@ public class PocketScanner {
     public PocketScanner(List<String> firewall) {
         this.firewall = firewall.stream()
                 .map(s -> s.split(": "))
-                .collect(Collectors.toMap(strings -> parseInt(strings[0]), strings -> new Layer(parseInt(strings[1]))));
+                .collect(toMap(strings -> parseInt(strings[0]), strings -> new Layer(parseInt(strings[1]))));
         this.maxLayer = this.firewall.keySet()
                 .stream()
                 .max(Integer::compareTo)
@@ -33,5 +33,42 @@ public class PocketScanner {
             firewall.values().forEach(Layer::move);
         }
         return severity;
+    }
+
+    public boolean computeSafePass() {
+        var temp = copyFirewall();
+        for (int i = 0; i <= maxLayer; i++) {
+            if (temp.containsKey(i)) {
+                Layer layer = temp.get(i);
+                int position = layer.getPosition();
+                if (position == 1) {
+                    return false;
+                }
+            }
+            temp.values().forEach(Layer::move);
+        }
+        return true;
+    }
+
+    public void delay() {
+            firewall.values().forEach(Layer::move);
+    }
+
+    public void resetLayers() {
+        firewall.values()
+                .forEach(Layer::reset);
+    }
+
+    private Map<Integer, Layer> copyFirewall() {
+        return firewall
+                .entrySet()
+                .stream()
+                .collect(toMap(
+                        Map.Entry::getKey,
+                        entry->{
+                            Layer value = entry.getValue();
+                            return new Layer(value.getSize(), value.getDirection(), value.getPosition());
+                        })
+                );
     }
 }
