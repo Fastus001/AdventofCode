@@ -3,6 +3,8 @@ package com.karczmarzyk.advent2017.day10;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -75,13 +77,24 @@ class KnotHashTest {
     void partTwoTest() {
         KnotHash knotHash = new KnotHash(256);
 
-        final int[] ints = Util.parseInput("225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110");
+        String hash = knotHash.generate("225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110");
+
+        assertEquals("e1a65bfb5a5ce396025fab5528c25a87", hash);
+    }
+
+    @Test
+    void testDay14testCases() {
+        KnotHash knotHash = new KnotHash(256);
+
+        final int[] ints = Util.parseInput("flqrgnkx-0");
 
         for (int i = 0; i < 64; i++) {
             knotHash.start(ints);
         }
 
         String hash = Util.densHash(knotHash.getNumbers());
+        String binary = new BigInteger(hash, 16).toString();
+        System.out.println("binary = " + binary);
 
         assertEquals("e1a65bfb5a5ce396025fab5528c25a87", hash);
     }

@@ -25,6 +25,16 @@ public class KnotHash {
         return numbers.get(0) * numbers.get(1);
     }
 
+    public String generate(String input) {
+        int[] ints = Util.parseInput(input);
+        for (int i = 0; i < 64; i++) {
+            for (int anInt : ints) {
+                reverseSublist(anInt);
+            }
+        }
+        return Util.densHash(getNumbers());
+    }
+
     public void reverseSublist(int length) {
         List<Integer> temp = getSubList(length);
         Collections.reverse(temp);
