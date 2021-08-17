@@ -12,12 +12,15 @@ public class Judge {
         this.genB = genB;
     }
 
-
     public boolean isLowestBitsSame() {
         int minLengthA = 16;
         int minLengthB = 16;
         String nextAValue = genA.onNext();
         String nextBValue = genB.onNext();
+        return checkMinLength(minLengthA, minLengthB, nextAValue, nextBValue);
+    }
+
+    private static boolean checkMinLength(int minLengthA, int minLengthB, String nextAValue, String nextBValue) {
         int lengthA = nextAValue.length();
         if(lengthA < minLengthA){
             minLengthA = lengthA;
@@ -30,5 +33,11 @@ public class Judge {
         String subB = nextBValue.substring(lengthB - minLengthB, lengthB);
 
         return subA.equals(subB);
+    }
+
+    public static boolean isLowestBitsSame(String nextAValue, String nextBValue) {
+        int minLengthA = 16;
+        int minLengthB = 16;
+        return checkMinLength(minLengthA, minLengthB, nextAValue, nextBValue);
     }
 }
