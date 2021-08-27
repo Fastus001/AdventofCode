@@ -43,9 +43,13 @@ class DanceMovesTest {
 
     @Test
     void checkDanceOrderAfterTestCaseDance(){
+        List<Move> moves = List.of("s1", "x3/4", "pe/b").stream()
+                .map(Move::new)
+                .collect(Collectors.toList());
         DanceMoves dm = new DanceMoves("abcde");
+        dm.setMoves(moves);
 
-        dm.dance(List.of("s1", "x3/4", "pe/b"));
+        dm.dance();
 
         assertThat(dm.toString()).isEqualTo("baedc");
     }
@@ -53,14 +57,41 @@ class DanceMovesTest {
     @Test
     void checkFirstSolution() throws IOException {
         DanceMoves dm = new DanceMoves("abcdefghijklmnop");
-        List<String> moveList =
+        List<Move> moveList =
                 Arrays.stream(Files.readString(Path.of("src/main/resources/2017/day16/input.txt"))
                         .split(","))
+                        .map(Move::new)
                         .collect(Collectors.toList());
+        dm.setMoves(moveList);
 
-        dm.dance(moveList);
+        dm.dance();
 
         assertThat(dm.toString()).isEqualTo("lbdiomkhgcjanefp");
+    }
+
+    @Test
+    void checkSecondSolution() throws IOException {
+        DanceMoves dm = new DanceMoves("abcdefghijklmnop");
+        List<Move> moveList =
+                Arrays.stream(Files.readString(Path.of("src/main/resources/2017/day16/input.txt"))
+                        .split(","))
+                        .map(Move::new)
+                        .collect(Collectors.toList());
+        dm.setMoves(moveList);
+
+//        for (int i = 1; i <= 1_000_000_000; i++) {
+        for (int i = 1; i <= 48; i++) {
+            if(i % 10_000 ==0) {
+                System.out.println("i = " + i);
+            }
+            dm.dance();
+            if(dm.toString().equals("abcdefghijklmnop")){
+                System.out.println("i taki sam string!= " + i);
+            }
+        }
+
+        assertThat(dm.toString()).isEqualTo("ejkflpgnamhdcboi");
+        //cykl się powtarza co 56 przejść!!
     }
 
 
