@@ -12,7 +12,7 @@ class SonarSweepTest {
 
     @Test
     void countDepthIncrease() {
-        int [] input = {199,200,208,210,200,207,240,269,260,263};
+        int[] input = {199, 200, 208, 210, 200, 207, 240, 269, 260, 263};
 
         int result = SonarSweep.countDepthIncrease(input);
 
@@ -31,7 +31,7 @@ class SonarSweepTest {
 
     @Test
     void partTwoTestSample() {
-        int [] input = {199,200,208,210,200,207,240,269,260,263};
+        int[] input = {199, 200, 208, 210, 200, 207, 240, 269, 260, 263};
         int[] afterConversion = SonarSweep.convertToThreeMeasurement(input);
 
         int result = SonarSweep.countDepthIncrease(afterConversion);
