@@ -16,8 +16,10 @@ class SmokeTest {
         Smoke smoke = new Smoke(Files.readAllLines(Path.of("src/main/resources/2021/day9/test.txt")));
 
         int result = smoke.computeRiskLevel();
+        int basinSizesLargest = smoke.getBasinSizesLargest();
 
         Assertions.assertThat(result).isEqualTo(15);
+        Assertions.assertThat(basinSizesLargest).isEqualTo(1134);
     }
 
     @Test
@@ -25,7 +27,9 @@ class SmokeTest {
         Smoke smoke = new Smoke(Files.readAllLines(Path.of("src/main/resources/2021/day9/input.txt")));
 
         int result = smoke.computeRiskLevel();
+        int basinSizesLargest = smoke.getBasinSizesLargest();
 
         Assertions.assertThat(result).isEqualTo(436);
+        Assertions.assertThat(basinSizesLargest).isEqualTo(1317792);
     }
 }
