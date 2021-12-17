@@ -17,7 +17,7 @@ class PassagePathTest {
             pp.compute();
         }
 
-        assertThat(pp.numberOfRoutes()).isEqualTo(226);
+        assertThat(pp.numberOfRoutes()).isEqualTo(36);
     }
 
     @Test
@@ -26,7 +26,8 @@ class PassagePathTest {
         while (pp.getSizeOfRoutes()!=0){
             pp.compute();
         }
-
-        assertThat(pp.numberOfRoutes()).isEqualTo(3369);
+//part one
+//        assertThat(pp.numberOfRoutes()).isEqualTo(3369);
+        assertThat(pp.numberOfRoutes()).isEqualTo(85883);
     }
 }

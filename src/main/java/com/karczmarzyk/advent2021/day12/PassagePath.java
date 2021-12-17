@@ -1,11 +1,10 @@
 package com.karczmarzyk.advent2021.day12;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class PassagePath {
-    private static int COUNTER = 1;
+    private int COUNTER = 1;
     private final Map<String, Cave> caves = new HashMap<>();
     private List<Route> routes = new ArrayList<>();
     private List<Route> routesFinished = new ArrayList<>();

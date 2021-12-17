@@ -53,6 +53,11 @@
             <artifactId>annotations-java5</artifactId>
             <version>22.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
     </dependencies>
 
     <build>
