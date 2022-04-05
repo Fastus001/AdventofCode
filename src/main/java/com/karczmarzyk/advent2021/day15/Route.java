@@ -1,33 +1,30 @@
 package com.karczmarzyk.advent2021.day15;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.*;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 public class Route {
-    private final List<Tile> route = new ArrayList<>();
+    private int totalRisk;
     private Tile lastTile;
     private boolean isFinished = false;
 
-    public Route(List<Tile> route) {
-        route.forEach(r->this.route.add(new Tile(r.row, r.col, r.risk)));
+    public Route(Tile lastTile, int totalRisk) {
+        this.lastTile = lastTile;
+        this.totalRisk = totalRisk;
     }
 
-    public Optional<Route> addTile(Tile tile) {
-        //twice encountered same tile, destroy this route
-        if (route.contains(tile)) {
-            return Optional.empty();
-        }
+    public Route addTile(Tile tile) {
         this.lastTile = tile;
-        route.add(tile);
-        return Optional.of(this);
-    }
-
-    public int getRiskLevel() {
-        return this.route.stream().mapToInt(Tile::risk).sum();
+        this.totalRisk += tile.risk;
+        return this;
     }
 
     record Tile(int row, int col, int risk){

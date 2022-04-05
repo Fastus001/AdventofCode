@@ -24,7 +24,25 @@ class ChitonTest {
 
 
     @Test
-    void makeMove() {
+    void makeMove() throws IOException {
+        Chiton chiton = new Chiton(Files.readAllLines(Path.of("src/main/resources/2021/day15/test.txt")));
+
+        while (chiton.getRoutes().size() > 0) {
+            chiton.makeMove();
+        }
+
+        assertThat(chiton.getRiskLevel()).isEqualTo(40);
+    }
+
+    @Test
+    void partOne() throws IOException {
+        Chiton chiton = new Chiton(Files.readAllLines(Path.of("src/main/resources/2021/day15/input.txt")));
+
+        while (chiton.getRoutes().size() > 0) {
+            chiton.makeMove();
+        }
+
+        assertThat(chiton.getRiskLevel()).isEqualTo(366);
     }
 
     @Test
@@ -38,6 +56,12 @@ class ChitonTest {
         routes = chiton.generateMoves(routes.get(0));
 
         assertThat(routes.size()).isEqualTo(2);
+
+        routes = chiton.generateMoves(new Route(new Route.Tile(9, 9, 1), 45));
+
+        //
+        assertThat(routes.size()).isEqualTo(1);
+        assertThat(routes.get(0).isFinished()).isTrue();
     }
 
     @Test
