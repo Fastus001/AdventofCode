@@ -1,13 +1,13 @@
 package com.karczmarzyk.advent2016.day1;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.AssertJUnit.assertEquals;
 
 class GridTest {
     private Grid grid;
-    @BeforeEach
+    @BeforeTest
     public void setup()
     {
         grid = new Grid();
