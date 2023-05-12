@@ -1,0 +1,35 @@
+package com.karczmarzyk.advent2017.day12;
+
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Data
+public class Pipe {
+    private final Integer number;
+    private final List<Integer> programsId;
+    private List<Pipe> pipes = new ArrayList<>();
+    private boolean zeroLinked = false;
+
+    public Pipe(Integer number, List<Integer> programsId) {
+        this.number = number;
+        this.programsId = programsId;
+    }
+
+    public void setPipes(Map<Integer, Pipe> records) {
+            pipes = programsId.stream()
+                    .map(records::get)
+                    .collect(Collectors.toList());
+    }
+
+    public void setZeroLinkedTrue() {
+        this.zeroLinked = true;
+        List<Pipe> list = pipes.stream().filter(pipe -> !pipe.zeroLinked)
+                .collect(Collectors.toList());
+        list.forEach(pipe -> pipe.setZeroLinked(true));
+        list.forEach(Pipe::setZeroLinkedTrue);
+    }
+}

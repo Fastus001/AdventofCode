@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
 class GridTest {
+
     private Grid grid;
     @BeforeTest
     public void setup()
