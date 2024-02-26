@@ -73,7 +73,7 @@ public class AllinaSingleNight {
                 .mapToInt(AllinaSingleNight::sumRouteDistance)
                 .min()
                 .orElse(0);
-        System.out.println("Droga najkrótsza MAX= " + min);
+        System.out.println("Droga najkrtsza MAX= " + min);
 
         /*
         PART 2
@@ -82,7 +82,7 @@ public class AllinaSingleNight {
                 .mapToInt(AllinaSingleNight::sumRouteDistance)
                 .max()
                 .orElse(0);
-        System.out.println("Droga nad³u¿sza MAX= " + max);
+        System.out.println("Droga nadusza MAX= " + max);
 
     }
 }

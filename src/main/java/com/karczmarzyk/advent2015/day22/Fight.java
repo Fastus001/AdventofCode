@@ -40,7 +40,7 @@ public class Fight {
                 if ( rechargeEffect ==0 )
                     rechargeEffect = wizard.castRecharge();break;
             default:
-                System.out.println("B³¹d!!"); break;
+                System.out.println("Bd!!"); break;
         }
     }
 
