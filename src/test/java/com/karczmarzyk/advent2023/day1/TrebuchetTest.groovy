@@ -31,13 +31,37 @@ class TrebuchetTest extends Specification{
 
     def 'should return sum for first part'() {
         given:
-        def list = Files.readAllLines( Path.of( 'src/main/java/com/karczmarzyk/advent2023/day1/input.txt' ) );
+        def list = Files.readAllLines( Path.of( 'src/main/java/com/karczmarzyk/advent2023/day1/input.txt' ) )
 
         when:
         def result = Trebuchet.getSum(list)
 
         then:
         result == 55172
+    }
+
+    def 'should return sum for second part test samples'() {
+        given:
+        def list = Files.readAllLines( Path.of( 'src/main/java/com/karczmarzyk/advent2023/day1/testInput.txt' ) )
+        def converter = new TrebuchetSecond()
+
+        when:
+        def result = Trebuchet.getSum(list.stream().map { it -> converter.convert(it)} as List<String>)
+
+        then:
+        result == 281
+    }
+
+    def 'should return sum for second part'() {
+        given:
+        def list = Files.readAllLines( Path.of( 'src/main/java/com/karczmarzyk/advent2023/day1/input.txt' ) )
+        def converter = new TrebuchetSecond()
+
+        when:
+        def result = Trebuchet.getSum(list.stream().map { it -> converter.convert(it)} as List<String>)
+
+        then:
+        result == 54925
     }
 
 }
